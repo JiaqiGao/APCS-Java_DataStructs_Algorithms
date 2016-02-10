@@ -1,18 +1,22 @@
 public class Board{
-    int n=5;
     int column = 0;
-    int[][] board = new int[n][n];
+    int[][] board;
+    int length;
 
+    public Board(int n){
+        length = n;
+        board = new int[length][length];
+    }
     
     public boolean solve(){
        return addQueen();
     }
 
     public void printBoard(){
-        for(int i=0; i<n; i++){
-            for(int j=0; j<n; j++){
+        for(int i=0; i<length; i++){
+            for(int j=0; j<length; j++){
                 System.out.print(board[i][j]);
-                if(j<n-1){
+                if(j<length-1){
                     if(board[i][j+1]<0){
                         System.out.print(" ");
                     }else{
@@ -25,14 +29,13 @@ public class Board{
     }
 
     public boolean addQueen(){
-        for(int row=0; row<n; row++){
+        for(int row=0; row<length; row++){
             if(board[row][column] == 0){
                 board[row][column] = 1;
-                if(column != n-1){
-                    for(int i=column+1; i<n; i++){
-                        board[row][i]--;
-                    }
-                    // loseOptions(row,column);
+                if(column != length-1){
+                   
+                    loseOptions(row,column,-1);
+                   
                 }
                 
                 return true;
@@ -42,31 +45,48 @@ public class Board{
     
     }
 
-    public void loseOptions(int r, int c){
-        int rr=r;
-        int cc=c;
-        while(rr>0){
-            board[rr-1][cc+1]--;
-            rr--;
-            cc++;
+    public void loseOptions(int r, int c, int l){
+        for(int i=c+1; i<length; i++){
+                board[r][i]+=l;
         }
-        rr=r;
-        cc=c;
-        while(rr<n){
-            board[rr+1][cc+1]--;
-            rr++;
-            cc++;
+        
+        int rcopy = r;
+        for(int i=c+1; i<length; i++){
+            if(rcopy>=0 && rcopy<length-r){
+                rcopy++;
+                board[rcopy][i]+=l;
+            }
         }
         
         
+        rcopy = r;
+        for(int i=c+1; i<length; i++){
+            if(rcopy<=length-r && rcopy>0){
+                rcopy--;
+                board[rcopy][i]+=l;
+            }
+        }
     }
 
     
     
-    public void removeQueen(){
+    public boolean removeQueen(){
+         for(int row=0; row<length; row++){
+            if(board[row][column] == 1){
+                board[row][column] = 0;
+                if(column != 0){
+                    
+                    loseOptions(row,column,1);
+                }
+                
+                return true;
+            }
+        }
+        return false; 
     }
+    
     public static void main(String[]arggs){
-        Board b = new Board();
+        Board b = new Board(7);
         System.out.println(b.solve());
         b.printBoard();
     }
