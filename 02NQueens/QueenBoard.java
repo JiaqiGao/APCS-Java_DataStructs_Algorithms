@@ -22,11 +22,12 @@ public class QueenBoard{
      *Helper method for solve. 
      */
     private boolean solveH(int col){
-	if(col == board.length){
+        int len = board.length;
+	if(col == len){
             return true;
             
         }else{
-            for(int row=0; row<board.length; row++){
+            for(int row=0; row<len; row++){
                 if(addQueen(row,col)){
                     addQueen(row,col);
                     
@@ -46,9 +47,9 @@ public class QueenBoard{
 	   all negative numbers, and 0's are replaced with '_'
 	   and all 1's are replaced with 'Q'
 	 */
-        int length = board.length;
-        for(int i=0; i<length; i++){
-            for(int j=0; j<length; j++){
+        int len = board.length;
+        for(int i=0; i<len; i++){
+            for(int j=0; j<len; j++){
                 if(board[i][j]>0)
                     System.out.print('Q');
                 if(board[i][j]<=0)
@@ -113,7 +114,7 @@ public class QueenBoard{
     }
     
     public static void main(String[]args){
-	QueenBoard b = new QueenBoard(4);
+	QueenBoard b = new QueenBoard(8);
         System.out.println(b);
 	System.out.println(b.solve());
         System.out.println(b);
