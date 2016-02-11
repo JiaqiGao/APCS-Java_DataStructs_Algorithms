@@ -1,6 +1,8 @@
 public class KnightBoard{
     private int[][]board;
     private int counter=0;
+    private int currentrow;
+    private int currentcol;
 
     public KnightBoard(int size){
 	board = new int[size][size];
@@ -13,8 +15,12 @@ public class KnightBoard{
     public boolean solveH(int row, int col){
 	if(board[row][col]==1){
 	    return true; 
+	}else{
+	    if(addKnight(row,col)){
+		addKnight(row,col);
+		if
+	    }
 	}
-	
     }
 
     public boolean addKnight(int row, int col){
