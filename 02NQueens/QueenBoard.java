@@ -23,20 +23,18 @@ public class QueenBoard{
      */
     private boolean solveH(int col){
 	if(col == board.length){
-            for(int i=0; i<board.length; i++){
-                if(addQueen(i,col)){
-                    return true;
-                }
-            }
+            return true;
+            
         }else{
-            for(int i=0; i<board.length; i++){
-                if(addQueen(i,col)){
-                    addQueen(i, col);
+            for(int row=0; row<board.length; row++){
+                if(addQueen(row,col)){
+                    addQueen(row,col);
+                    
                     if(solveH(col+1)){
                         return true;
+                    }else{
+                        removeQueen(row,col);
                     }
-             
-                    removeQueen(i,col);
                 }
             }
         }
@@ -48,6 +46,19 @@ public class QueenBoard{
 	   all negative numbers, and 0's are replaced with '_'
 	   and all 1's are replaced with 'Q'
 	 */
+        int length = board.length;
+        for(int i=0; i<length; i++){
+            for(int j=0; j<length; j++){
+                if(board[i][j]>0)
+                    System.out.print('Q');
+                if(board[i][j]<=0)
+                    System.out.print('_');
+                
+                System.out.print("       ");
+            }
+            System.out.println();
+        }
+    
     }
 
     /********Do Not Edit Below This Line**********************************/
@@ -102,10 +113,11 @@ public class QueenBoard{
     }
     
     public static void main(String[]args){
-	QueenBoard b = new QueenBoard(8);
+	QueenBoard b = new QueenBoard(4);
         System.out.println(b);
 	System.out.println(b.solve());
         System.out.println(b);
+        b.printSolution();
     }
     
     
