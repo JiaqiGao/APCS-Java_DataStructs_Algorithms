@@ -1,63 +1,144 @@
 public class KnightBoard{
     private int[][]board;
     private int counter=0;
-    private int currentrow;
-    private int currentcol;
 
     public KnightBoard(int size){
 	board = new int[size][size];
     }
  
     public boolean solve(){
-	return solveH(0,0);
+	return check(0,0);
+    }
+    
+    public String  toString(){
+	String ans = "";
+	for(int r = 0; r < board.length; r++){
+	    for(int c = 0; c < board[0].length; c++){
+		ans+= board[r][c]+"\t";
+	    }
+	    ans+="\n";
+	}
+	return ans;
     }
 
     public boolean solveH(int row, int col){
 	if(board[row][col]==1){
 	    return true; 
-	}else{
-	    if(addKnight(row,col)){
-		addKnight(row,col);
-		if
+	}else 
+    }
+
+    public boolean check(int row, int col){
+	int currentrow = row;
+	int currentcol = col;
+	if(board[row-2][col+1]==0){
+	    currentrow = row-2;
+	    currentcol = col-1;
+	    addKnight(currentrow, currentcol);
+	    if (solveH(currentrow, currentcol)){
+		return true;
+	    }else{
+		removeKnight(col,row);
 	    }
+	}else if(board[row-2][col-1]==0){
+	    currentrow = row-2;
+	    currentcol = col-1;
+	    addKnight(currentrow, currentcol);
+	    if (solveH(currentrow, currentcol)){
+		return true;
+	    }else{
+		removeKnight(col,row);
+	    }
+	
+	}else if(board[row-1][col-2]==0){
+	    currentrow = row-1;
+	    currentcol = col-2;
+	    addKnight(currentrow, currentcol);
+	    if (solveH(currentrow, currentcol)){
+		return true;
+	    }else{
+		removeKnight(col,row);
+	    }
+	
+	}else if(board[row+1][col-2]==0){
+	    currentrow = row+1;
+	    currentcol = col-2;
+	    addKnight(currentrow, currentcol);
+	    if (solveH(currentrow, currentcol)){
+		return true;
+	    }else{
+		removeKnight(col,row);
+	    }
+	
+	}else if(board[row+2][col-1]==0){
+	    currentrow = row-2;
+	    currentcol = col+1;
+	    addKnight(currentrow, currentcol);
+	    if (solveH(currentrow, currentcol)){
+		return true;
+	    }else{
+		removeKnight(col,row);
+	    }
+	
+	}else if(board[row+2][col+1]==0){
+	    currentrow = row-2;
+	    currentcol = col+1;
+	    addKnight(currentrow, currentcol);
+	    if (solveH(currentrow, currentcol)){
+		return true;
+	    }else{
+		removeKnight(col,row);
+	    }
+	
+	}else if(board[row+1][col+2]==0){
+	    currentrow = row+1;
+	    currentcol = col+2;
+	    addKnight(currentrow, currentcol);
+	    if (solveH(currentrow, currentcol)){
+		return true;
+	    }else{
+		removeKnight(col,row);
+	    }
+	
+	}else if(board[row-1][col+2]==0){
+	    currentrow = row-1;
+	    currentcol = col+2;
+	    addKnight(currentrow, currentcol);
+	    if (solveH(currentrow, currentcol)){
+		return true;
+	    }else{
+		removeKnight(col,row);
+	    }
+	
+	}else{
+	    return false;
 	}
     }
 
-    public boolean addKnight(int row, int col){
-        for(int row=0; row<length; row++){
-            if(board[row][col] == 0){
-		counter++;
-                board[row][col] = counter;
-                if(column != length-1){
-                   
-                }
-                
-                return true;
-            }
-        }
-        return false; 
     
-    }
-public void printSolution(){
-	/**Print the board like toString, except
-	   all negative numbers, and 0's are replaced with '_'
-	   and all 1's are replaced with 'Q'
-	 */
-        int len = board.length;
-        for(int i=0; i<len; i++){
-            for(int j=0; j<len; j++){
-                if(board[i][j]>0)
-                    System.out.print(board[i][j]);
-                if(board[i][j]<=0)
-                    System.out.print('_');
-                
-                System.out.print("       ");
-            }
-            System.out.println();
-        }
+
+
+    public boolean addKnight(int row, int col){
+	counter++; 
+	board[row][col] = counter;
+    
+	return true;
     
     }
 
+    public boolean removeKnight(int row, int col){
+	counter--;
+	board[row][col] = 0;
+	return true;
+    }
+
+
+public static void main(String[]args){
+	KnightBoard b = new KnightBoard(8);
+        System.out.println(b);
+	System.out.println(b.solve());
+        System.out.println(b);
+	// b.printSolution();
+    }
 
 }
 
