@@ -24,10 +24,15 @@ public class KnightBoard{
     public boolean solveH(int row, int col){
 	if(board[row][col]==1){
 	    return true; 
-	}else 
+	}else{
+            return check(0,0);
+        }
     }
 
     public boolean check(int row, int col){
+        if(counter == board.length*board.length){
+            return true;
+        }
 	int currentrow = row;
 	int currentcol = col;
 	if(board[row-2][col+1]==0){
@@ -35,18 +40,18 @@ public class KnightBoard{
 	    currentcol = col-1;
 	    addKnight(currentrow, currentcol);
 	    if (solveH(currentrow, currentcol)){
-		return true;
+		return check(currentrow,currentcol);
 	    }else{
-		removeKnight(col,row);
+		return removeKnight(col,row);
 	    }
 	}else if(board[row-2][col-1]==0){
 	    currentrow = row-2;
 	    currentcol = col-1;
 	    addKnight(currentrow, currentcol);
 	    if (solveH(currentrow, currentcol)){
-		return true;
+		return check(currentrow,currentcol);
 	    }else{
-		removeKnight(col,row);
+		return removeKnight(col,row);
 	    }
 	
 	}else if(board[row-1][col-2]==0){
@@ -54,9 +59,9 @@ public class KnightBoard{
 	    currentcol = col-2;
 	    addKnight(currentrow, currentcol);
 	    if (solveH(currentrow, currentcol)){
-		return true;
+		return check(currentrow,currentcol);
 	    }else{
-		removeKnight(col,row);
+		return removeKnight(col,row);
 	    }
 	
 	}else if(board[row+1][col-2]==0){
@@ -64,29 +69,29 @@ public class KnightBoard{
 	    currentcol = col-2;
 	    addKnight(currentrow, currentcol);
 	    if (solveH(currentrow, currentcol)){
-		return true;
+		return check(currentrow,currentcol);
 	    }else{
-		removeKnight(col,row);
+		return removeKnight(col,row);
 	    }
 	
 	}else if(board[row+2][col-1]==0){
-	    currentrow = row-2;
-	    currentcol = col+1;
+	    currentrow = row+2;
+	    currentcol = col-1;
 	    addKnight(currentrow, currentcol);
 	    if (solveH(currentrow, currentcol)){
-		return true;
+		return check(currentrow,currentcol);
 	    }else{
-		removeKnight(col,row);
+		return removeKnight(col,row);
 	    }
 	
 	}else if(board[row+2][col+1]==0){
-	    currentrow = row-2;
+	    currentrow = row+2;
 	    currentcol = col+1;
 	    addKnight(currentrow, currentcol);
 	    if (solveH(currentrow, currentcol)){
-		return true;
+                return check(currentrow,currentcol);
 	    }else{
-		removeKnight(col,row);
+		return removeKnight(col,row);
 	    }
 	
 	}else if(board[row+1][col+2]==0){
@@ -94,9 +99,9 @@ public class KnightBoard{
 	    currentcol = col+2;
 	    addKnight(currentrow, currentcol);
 	    if (solveH(currentrow, currentcol)){
-		return true;
+		return check(currentrow,currentcol);
 	    }else{
-		removeKnight(col,row);
+		return removeKnight(col,row);
 	    }
 	
 	}else if(board[row-1][col+2]==0){
@@ -104,9 +109,9 @@ public class KnightBoard{
 	    currentcol = col+2;
 	    addKnight(currentrow, currentcol);
 	    if (solveH(currentrow, currentcol)){
-		return true;
+		return check(currentrow,currentcol);
 	    }else{
-		removeKnight(col,row);
+		return removeKnight(col,row);
 	    }
 	
 	}else{
@@ -133,7 +138,7 @@ public class KnightBoard{
 
 
 public static void main(String[]args){
-	KnightBoard b = new KnightBoard(8);
+	KnightBoard b = new KnightBoard(2);
         System.out.println(b);
 	System.out.println(b.solve());
         System.out.println(b);
