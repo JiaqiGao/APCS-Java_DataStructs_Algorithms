@@ -1,15 +1,39 @@
+import java.util.Arrays;
+
 public class KnightBoard{
     private int[][]board;
     private int counter=0;
+    public int[][] moves = new int[8][2];
+    private int goal;
 
     public KnightBoard(int size){
 	board = new int[size][size];
+        goal = size*size;
+        moves[0][0] = -1;
+        moves[0][1] = -2;
+        moves[1][0] = 1;
+        moves[1][1] = -2;
+        moves[2][0] = -2;
+        moves[2][1] = -1;
+        moves[3][0] = 2;
+        moves[3][1] = -1;
+        moves[4][0] = -2;
+        moves[4][1] = 1;
+        moves[5][0] = -1;
+        moves[5][1] = 2;
+        moves[6][0] = 1;
+        moves[6][1] = 2;
+        moves[7][0] = 2;
+        moves[7][1] = 1;
+        
+           
+        // = {{-1,-2},{1,-2},{-2,-1},{2,-1},{-2,1},{-1,2},{1,2},{2,1}};
     }
  
     public boolean solve(){
 	return check(0,0);
     }
-    
+
     public String  toString(){
 	String ans = "";
 	for(int r = 0; r < board.length; r++){
@@ -19,6 +43,26 @@ public class KnightBoard{
 	    ans+="\n";
 	}
 	return ans;
+    }
+    
+    public void printSolution(){
+        solve();
+	String ans = "";
+	for(int r = 0; r < board.length; r++){
+	    for(int c = 0; c < board[0].length; c++){
+                if(board.length >= 10){
+                    if(c<10){
+                        ans+= "_"+board[r][c]+"\t";
+                    }else{
+                        ans+= board[r][c]+"\t";
+                    }
+                }else{
+                    ans+= board[r][c]+"\t";
+                }
+	    }
+	    ans+="\n";
+	}
+	System.out.println(ans);
     }
 
     public boolean solveH(int row, int col){
@@ -30,93 +74,32 @@ public class KnightBoard{
     }
 
     public boolean check(int row, int col){
-        if(counter == board.length*board.length){
+        //System.out.println("pass");
+        if(counter == goal){
             return true;
         }
 	int currentrow = row;
 	int currentcol = col;
-	if(board[row-2][col+1]==0){
-	    currentrow = row-2;
-	    currentcol = col-1;
-	    addKnight(currentrow, currentcol);
-	    if (solveH(currentrow, currentcol)){
-		return check(currentrow,currentcol);
-	    }else{
-		return removeKnight(col,row);
-	    }
-	}else if(board[row-2][col-1]==0){
-	    currentrow = row-2;
-	    currentcol = col-1;
-	    addKnight(currentrow, currentcol);
-	    if (solveH(currentrow, currentcol)){
-		return check(currentrow,currentcol);
-	    }else{
-		return removeKnight(col,row);
-	    }
-	
-	}else if(board[row-1][col-2]==0){
-	    currentrow = row-1;
-	    currentcol = col-2;
-	    addKnight(currentrow, currentcol);
-	    if (solveH(currentrow, currentcol)){
-		return check(currentrow,currentcol);
-	    }else{
-		return removeKnight(col,row);
-	    }
-	
-	}else if(board[row+1][col-2]==0){
-	    currentrow = row+1;
-	    currentcol = col-2;
-	    addKnight(currentrow, currentcol);
-	    if (solveH(currentrow, currentcol)){
-		return check(currentrow,currentcol);
-	    }else{
-		return removeKnight(col,row);
-	    }
-	
-	}else if(board[row+2][col-1]==0){
-	    currentrow = row+2;
-	    currentcol = col-1;
-	    addKnight(currentrow, currentcol);
-	    if (solveH(currentrow, currentcol)){
-		return check(currentrow,currentcol);
-	    }else{
-		return removeKnight(col,row);
-	    }
-	
-	}else if(board[row+2][col+1]==0){
-	    currentrow = row+2;
-	    currentcol = col+1;
-	    addKnight(currentrow, currentcol);
-	    if (solveH(currentrow, currentcol)){
-                return check(currentrow,currentcol);
-	    }else{
-		return removeKnight(col,row);
-	    }
-	
-	}else if(board[row+1][col+2]==0){
-	    currentrow = row+1;
-	    currentcol = col+2;
-	    addKnight(currentrow, currentcol);
-	    if (solveH(currentrow, currentcol)){
-		return check(currentrow,currentcol);
-	    }else{
-		return removeKnight(col,row);
-	    }
-	
-	}else if(board[row-1][col+2]==0){
-	    currentrow = row-1;
-	    currentcol = col+2;
-	    addKnight(currentrow, currentcol);
-	    if (solveH(currentrow, currentcol)){
-		return check(currentrow,currentcol);
-	    }else{
-		return removeKnight(col,row);
-	    }
-	
-	}else{
-	    return false;
-	}
+        for(int i=0; i<8; i++){
+            try{
+                if(board[row+moves[i][0]][col+moves[i][1]]==0){
+                     currentrow = row+moves[i][0];
+                     currentcol = col+moves[i][1];
+                     addKnight(currentrow, currentcol);
+                     if (check(currentrow, currentcol)){        
+                         return check(currentrow,currentcol);
+                     }else{
+                         //System.out.println("elsed");
+                         removeKnight(currentrow,currentcol);
+                         
+                         
+                     }
+                }
+            }catch (IndexOutOfBoundsException e){
+            }
+        }
+        return false;
+         
     }
 
     
@@ -132,14 +115,15 @@ public class KnightBoard{
 
     public boolean removeKnight(int row, int col){
 	counter--;
-	board[row][col] = 0;
+	board[row][col] = counter;
 	return true;
     }
 
 
 public static void main(String[]args){
-	KnightBoard b = new KnightBoard(2);
+	KnightBoard b = new KnightBoard(3);
         System.out.println(b);
+        System.out.println(Arrays.deepToString(b.moves));
 	System.out.println(b.solve());
         System.out.println(b);
 	// b.printSolution();
