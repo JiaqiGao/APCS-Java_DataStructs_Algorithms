@@ -6,32 +6,49 @@ public class KnightBoard{
     public int[][] moves = new int[8][2];
     private int goal;
 
+    public String name(){
+	return "Gao, JiaQi";
+    }
+    
     public KnightBoard(int size){
+        if(size<1){
+	    throw new IllegalArgumentException();
+	}
 	board = new int[size][size];
         goal = size*size;
-        moves[0][0] = -1;
-        moves[0][1] = -2;
-        moves[1][0] = 1;
-        moves[1][1] = -2;
-        moves[2][0] = -2;
-        moves[2][1] = -1;
-        moves[3][0] = 2;
-        moves[3][1] = -1;
-        moves[4][0] = -2;
-        moves[4][1] = 1;
-        moves[5][0] = -1;
-        moves[5][1] = 2;
-        moves[6][0] = 1;
-        moves[6][1] = 2;
+        moves[0][0] = -2;
+        moves[0][1] = 1;
+        moves[1][0] = -2;
+        moves[1][1] = -1;
+        moves[2][0] = -1;
+        moves[2][1] = 2;
+        moves[3][0] = -1;
+        moves[3][1] = -2;
+        moves[4][0] = 1;
+        moves[4][1] = 2;
+        moves[5][0] = 1;
+        moves[5][1] = -2;
+        moves[6][0] = 2;
+        moves[6][1] = 1;
         moves[7][0] = 2;
-        moves[7][1] = 1;
+        moves[7][1] = -1;
         
            
         // = {{-1,-2},{1,-2},{-2,-1},{2,-1},{-2,1},{-1,2},{1,2},{2,1}};
     }
  
     public boolean solve(){
-	return check(0,0);
+        
+        for(int i=0; i<board.length; i++){
+            for(int j=0; j<board.length; j++){
+                if(solveH(i,j)){
+                    return true;
+                }
+            }
+        }
+        return false;
+       
+	//return check(0,0);
     }
 
     public String  toString(){
@@ -65,15 +82,8 @@ public class KnightBoard{
 	System.out.println(ans);
     }
 
-    public boolean solveH(int row, int col){
-	if(board[row][col]==1){
-	    return true; 
-	}else{
-            return check(0,0);
-        }
-    }
 
-    public boolean check(int row, int col){
+    public boolean solveH(int row, int col){
         //System.out.println("pass");
         if(counter == goal){
             return true;
@@ -115,13 +125,13 @@ public class KnightBoard{
 
     public boolean removeKnight(int row, int col){
 	counter--;
-	board[row][col] = counter;
+	board[row][col] = 0;
 	return true;
     }
 
 
 public static void main(String[]args){
-	KnightBoard b = new KnightBoard(3);
+	KnightBoard b = new KnightBoard(8);
         System.out.println(b);
         System.out.println(Arrays.deepToString(b.moves));
 	System.out.println(b.solve());
