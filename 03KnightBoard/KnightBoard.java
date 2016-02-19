@@ -36,13 +36,26 @@ public class KnightBoard{
            
         // = {{-1,-2},{1,-2},{-2,-1},{2,-1},{-2,1},{-1,2},{1,2},{2,1}};
     }
- 
+
+    public void resetBoard(){
+        counter=0;
+        for(int i=0; i<board.length; i++){
+            for(int j=0; j<board.length; j++){
+                board[i][j]=0;
+            }
+        }
+    }
+    
     public boolean solve(){
         
         for(int i=0; i<board.length; i++){
             for(int j=0; j<board.length; j++){
+                addKnight(i,j);
                 if(solveH(i,j)){
                     return true;
+                }
+                if(i<board.length-1){
+                    resetBoard();
                 }
             }
         }
@@ -95,15 +108,20 @@ public class KnightBoard{
                 if(board[row+moves[i][0]][col+moves[i][1]]==0){
                      currentrow = row+moves[i][0];
                      currentcol = col+moves[i][1];
+                     if(addKnight(currentrow, currentcol)){
+                         return solveH(currentrow,currentcol);
+                     }
+                     /*
                      addKnight(currentrow, currentcol);
                      if (check(currentrow, currentcol)){        
-                         return check(currentrow,currentcol);
+                         return check;
                      }else{
                          //System.out.println("elsed");
                          removeKnight(currentrow,currentcol);
                          
                          
                      }
+                     */
                 }
             }catch (IndexOutOfBoundsException e){
             }
@@ -116,6 +134,9 @@ public class KnightBoard{
 
 
     public boolean addKnight(int row, int col){
+        if(board[row][col]!=0){
+            return false;
+        }
 	counter++; 
 	board[row][col] = counter;
     
@@ -123,15 +144,9 @@ public class KnightBoard{
     
     }
 
-    public boolean removeKnight(int row, int col){
-	counter--;
-	board[row][col] = 0;
-	return true;
-    }
-
 
 public static void main(String[]args){
-	KnightBoard b = new KnightBoard(8);
+	KnightBoard b = new KnightBoard(3);
         System.out.println(b);
         System.out.println(Arrays.deepToString(b.moves));
 	System.out.println(b.solve());
