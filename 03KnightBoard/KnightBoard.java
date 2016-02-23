@@ -10,12 +10,12 @@ public class KnightBoard{
 	return "Gao, JiaQi";
     }
     
-    public KnightBoard(int size){
-        if(size<1){
+    public KnightBoard(int cols, int rows){
+        if(cols<1 || rows<1){
 	    throw new IllegalArgumentException();
 	}
-	board = new int[size][size];
-        goal = size*size;
+	board = new int[cols][rows];
+        goal = cols*rows;
         moves[0][0] = -2;
         moves[0][1] = 1;
         
@@ -47,7 +47,7 @@ public class KnightBoard{
     public void resetBoard(){
         counter=0;
         for(int i=0; i<board.length; i++){
-            for(int j=0; j<board.length; j++){
+            for(int j=0; j<board[0].length; j++){
                 board[i][j]=0;
             }
         }
@@ -60,18 +60,18 @@ public class KnightBoard{
             return true;
         }
         
-        if(board.length>6){
+        if(board.length>6 && board[0].length>6){
             System.out.println("Runtime for solve function is takes too long so I can't confirm if it works for this board length");
             return false; 
         }
         for(int i=0; i<board.length; i++){
-            for(int j=0; j<board.length; j++){
+            for(int j=0; j<board[0].length; j++){
                 addKnight(i,j);
                 if(solveH(i,j)){
                     return true;
                 }
              
-                if(i!=board.length-1&&j!=board.length-1){
+                if(i!=board.length-1&&j!=board[0].length-1){
                     resetBoard();
                     }
                 
@@ -164,12 +164,13 @@ public class KnightBoard{
 
     /*
 public static void main(String[]args){
-    KnightBoard b = new KnightBoard(2);
+    KnightBoard b = new KnightBoard(30,2);
     //System.out.println(Arrays.deepToString(b.moves));
     System.out.println(b.solve());
        
-	b.printSolution();
+    b.printSolution();
     }
     */
+    
 }
 
