@@ -40,8 +40,6 @@ public class KnightBoard{
         moves[7][0] = 2;
         moves[7][1] = -1;
         
-           
-        // = {{-1,-2},{1,-2},{-2,-1},{2,-1},{-2,1},{-1,2},{1,2},{2,1}};
     }
 
     public void resetBoard(){
@@ -54,16 +52,13 @@ public class KnightBoard{
     }
     
     public boolean solve(){
-        
-        if(board.length==6){
-            System.out.println("My solve function return true with the correct answer for 6x6 board but it takes a bit of a long time to run");
-            return true;
-        }
-        
+        /*
         if(board.length>6 && board[0].length>6){
             System.out.println("Runtime for solve function is takes too long so I can't confirm if it works for this board length");
             return false; 
         }
+        */
+       
         for(int i=0; i<board.length; i++){
             for(int j=0; j<board[0].length; j++){
                 addKnight(i,j);
@@ -78,8 +73,7 @@ public class KnightBoard{
             }
         }
         return false;
-       
-	//return check(0,0);
+        
     }
 
     public String  toString(){
@@ -118,15 +112,13 @@ public class KnightBoard{
 
 
     public boolean solveH(int row, int col){
-        if(counter >= goal){
+        if(counter == goal){
             counter++;
             addKnight(row,col);
             return true;
-        }else{
-            
+        }else{    
 	int currentrow = row;
 	int currentcol = col;
-        //System.out.println(board[row][col]);
         for(int i=0; i<8; i++){
             try{
                 if(board[row+moves[i][0]][col+moves[i][1]]==0){
@@ -146,7 +138,7 @@ public class KnightBoard{
         }
         return false;
         
-    }
+        }
     }
 
     
@@ -161,13 +153,12 @@ public class KnightBoard{
 	return true;
     
     }
-
+   
     /*
-public static void main(String[]args){
-    KnightBoard b = new KnightBoard(30,2);
+    public static void main(String[]args){
+    KnightBoard b = new KnightBoard(4,4);
     //System.out.println(Arrays.deepToString(b.moves));
     System.out.println(b.solve());
-       
     b.printSolution();
     }
     */
