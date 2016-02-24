@@ -9,7 +9,7 @@ public class Bronze{
 
     public Bronze(String filename){
         readFile(filename);
-        // stomp();
+        stomp(instrucs[0][0], instrucs[0][1], instrucs[0][2]);
     }
     
     public void readFile(String filename){
@@ -33,7 +33,6 @@ public class Bronze{
                 }
             }
 
-            
             for(int i=0; i<numInstrucs; i++){
                 for(int j=0; j<3; j++){
                     instrucs[i][j] = lines.nextInt();
@@ -53,7 +52,42 @@ public class Bronze{
         
     }
     
-    
+    public void stomp(int row, int col, int depth){
+        row--;
+        col--;
+        int highest = map[row][col];
+        // System.out.println();
+        //1.find highest
+        for(int i=row; i<row+3; i++){
+            for(int j=col; j<col+3; j++){
+                //System.out.println(map[i][j]);
+                if(highest<map[i][j]){
+                    
+                    highest = map[i][j];
+                }
+            }
+        }
+        int newHighest=0;
+        //2.decrease highest by depth
+        for(int i=row; i<row+3; i++){
+            for(int j=col; j<col+3; j++){
+                if(map[i][j]==highest){
+                    map[i][j]-=depth;
+                    newHighest=map[i][j];
+                }
+            }
+        }
+        //
+        //3.if any spot is higher than the now-lowered highest, subtract there
+        for(int i=row; i<row+3; i++){
+            for(int j=col; j<col+3; j++){
+                if(map[i][j]>newHighest){
+                    map[i][j]=newHighest;
+                }
+            }
+        }
+        System.out.println(Arrays.deepToString(map));
+    }
     
     public int makelake(){
 	return 0;
