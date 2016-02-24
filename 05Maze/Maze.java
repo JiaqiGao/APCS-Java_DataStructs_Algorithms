@@ -24,8 +24,7 @@ public class Maze{
         try{
             Scanner lines = new Scanner(instructions);
 	    int rows=0;
-	    
-	    //1.find rows and cols
+
             String lineOne = lines.nextLine();
 	    int cols = lineOne.length(); 
 	    while(lines.hasNext()){
@@ -34,7 +33,15 @@ public class Maze{
 	    }
 	    System.out.println(rows);
 	    System.out.println(cols); 
+	    
+	    lines = new Scanner(instructions);
 	    maze = new char[rows][cols];
+	    for(int i=0; i<rows; i++){
+		//nextline
+		for(int j=0; j<cols; j++){
+		    maze[i][j] = 
+		}
+	    }
             
         }catch (FileNotFoundException e){
             System.out.println("File not found");
