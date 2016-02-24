@@ -10,6 +10,8 @@ public class Bronze{
     public Bronze(String filename){
         readFile(filename);
         stomp(instrucs[0][0], instrucs[0][1], instrucs[0][2]);
+        stomp(instrucs[1][0], instrucs[1][1], instrucs[1][2]);
+        
     }
     
     public void readFile(String filename){
