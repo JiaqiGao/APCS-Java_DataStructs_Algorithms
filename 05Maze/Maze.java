@@ -19,6 +19,7 @@ public class Maze{
 
       3. When the file is not found, print an error and exit the program.
     */
+
     public Maze(String filename, boolean ani){
         File instructions = new File(filename);
         try{
@@ -31,17 +32,22 @@ public class Maze{
 		String countLines = lines.nextLine();
 		rows++; 
 	    }
-	    System.out.println(rows);
-	    System.out.println(cols); 
+	    //System.out.println(rows);
+	    //System.out.println(cols); 
 	    
 	    lines = new Scanner(instructions);
 	    maze = new char[rows][cols];
+	    Scanner copy = new Scanner(instructions);
+	    
 	    for(int i=0; i<rows; i++){
-		//nextline
+		String copyy=copy.nextLine();
 		for(int j=0; j<cols; j++){
-		    maze[i][j] = 
+		    maze[i][j] = copyy.charAt(j);
 		}
 	    }
+	    
+            System.out.println(Arrays.deepToString(maze));
+	    
             
         }catch (FileNotFoundException e){
             System.out.println("File not found");
