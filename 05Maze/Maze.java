@@ -3,7 +3,6 @@ import java.io.*;
 
 public class Maze{
 
-
     private char[][]maze;
     private int startx,starty;
     private boolean animate;
@@ -24,7 +23,7 @@ public class Maze{
         File instructions = new File(filename);
         try{
             Scanner lines = new Scanner(instructions);
-	    int rows=0;
+	    int rows=1;
 
             String lineOne = lines.nextLine();
 	    int cols = lineOne.length(); 
@@ -32,8 +31,8 @@ public class Maze{
 		String countLines = lines.nextLine();
 		rows++; 
 	    }
-	    //System.out.println(rows);
-	    //System.out.println(cols); 
+	    System.out.println(rows);
+	    System.out.println(cols); 
 	    
 	    lines = new Scanner(instructions);
 	    maze = new char[rows][cols];
@@ -42,12 +41,18 @@ public class Maze{
 	    for(int i=0; i<rows; i++){
 		String copyy=copy.nextLine();
 		for(int j=0; j<cols; j++){
+		    if(copyy.charAt(j)=='S'){
+			startx=i;
+			starty=j;
+		    }
 		    maze[i][j] = copyy.charAt(j);
 		}
 	    }
-	    
+	    /*
+	    System.out.println(startx);
+	    System.out.println(starty);
             System.out.println(Arrays.deepToString(maze));
-	    
+	    */
             
         }catch (FileNotFoundException e){
             System.out.println("File not found");
@@ -90,13 +95,40 @@ public class Maze{
             System.out.println(this);
             wait(20);
         }
-
+	if(maze[x][y]=='E'){
+	    return true;
+	}
+	if(posmove(x+1,y)){
+	    return solve(x+1,y);
+	}
+	if(posmove(x-1,y)){
+	    return solve(x-1,y);
+	}
+	if(posmove(x,y-1)){
+	    return solve(x,y-1);
+	}
+	if(posmove(x,y+1)){
+	    return solve(x,y+1);
+	}
+	maze[x][y]='.';
+	
+	
         //COMPLETE SOLVE
 
         return false; //so it compiles
     }
 
-
+    public boolean posmove(int x, int y){
+	try{
+	    if(maze[x][y]==' '){
+		maze[x][y]='@';
+		return true;
+	    }
+	    return false;
+	}catch (IndexOutOfBoundsException e){
+	    return false;
+	}
+    }
 
     //FREE STUFF!!! *you should be aware of this*
 
@@ -157,6 +189,10 @@ public class Maze{
     
     public static void main(String[]args){
 	Maze m = new Maze("data1.dat", false);
+        
+	//System.out.println(Arrays.deepToString(m.maze));
+	System.out.println(m.solve());
+	System.out.println(m);
     }
 
 
