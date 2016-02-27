@@ -182,7 +182,7 @@ public class Maze{
         }
     }
 
-    
+    /*
     public static void main(String[]args){
 	Maze m = new Maze("data1.dat", false);
         
@@ -190,6 +190,7 @@ public class Maze{
 	System.out.println(m.solve());
 	System.out.println(m);
     }
+    */
 
 
 
