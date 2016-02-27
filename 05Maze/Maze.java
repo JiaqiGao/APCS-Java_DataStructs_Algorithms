@@ -150,7 +150,7 @@ public class Maze{
             if(c == '#'){
                 ans += color(38,47)+c;
             }else{
-                ans += color(32,40)+c;
+                ans += color(33,40)+c;
             }
         }
         return HIDE_CURSOR + go(0,0) + ans + "\n" + SHOW_CURSOR + color(37,40);
