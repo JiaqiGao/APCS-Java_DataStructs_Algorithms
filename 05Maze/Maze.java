@@ -20,6 +20,7 @@ public class Maze{
     */
 
     public Maze(String filename, boolean ani){
+        animate = ani;
         File instructions = new File(filename);
         try{
             Scanner lines = new Scanner(instructions);
@@ -31,8 +32,8 @@ public class Maze{
 		String countLines = lines.nextLine();
 		rows++; 
 	    }
-	    System.out.println(rows);
-	    System.out.println(cols); 
+	    //System.out.println(rows);
+	    //System.out.println(cols); 
 	    
 	    lines = new Scanner(instructions);
 	    maze = new char[rows][cols];
@@ -134,15 +135,12 @@ public class Maze{
     }
 
 
-    public String toString(){
+   public String toString(){
         int maxx = maze.length;
         int maxy = maze[0].length;
         String ans = "";
-
         if(animate){
-
             ans = "Solving a maze that is " + maxx + " by " + maxy + "\n";
-
         }
         for(int i = 0; i < maxx * maxy; i++){
             if(i % maxx == 0 && i != 0){
