@@ -98,19 +98,18 @@ public class Maze{
 	if(maze[x][y]=='E'){
 	    return true;
 	}
-	if(posmove(x+1,y)){
-	    return solve(x+1,y);
-	}
-	if(posmove(x-1,y)){
-	    return solve(x-1,y);
-	}
-	if(posmove(x,y-1)){
-	    return solve(x,y-1);
-	}
-	if(posmove(x,y+1)){
-	    return solve(x,y+1);
-	}
-	maze[x][y]='.';
+        if(posmove(x,y)){
+            if(solve(x-1,y) || solve(x+1, y) ||
+               solve(x, y-1) || solve(x, y+1)){
+                return true;
+            }else{
+                maze[x][y] = '.';
+                return false;
+            }
+               
+        }
+        
+	//maze[x][y]='.';
 	
 	
         //COMPLETE SOLVE
@@ -119,15 +118,12 @@ public class Maze{
     }
 
     public boolean posmove(int x, int y){
-	try{
-	    if(maze[x][y]==' '){
-		maze[x][y]='@';
-		return true;
-	    }
-	    return false;
-	}catch (IndexOutOfBoundsException e){
-	    return false;
-	}
+	if(maze[x][y] != ' '){
+            return false;
+        }else{
+            maze[x][y] = '@';
+            return true;
+        }
     }
 
     //FREE STUFF!!! *you should be aware of this*
