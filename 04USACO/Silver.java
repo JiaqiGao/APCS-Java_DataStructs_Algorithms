@@ -1,41 +1,63 @@
+import java.util.Scanner;
+import java.util.Arrays;
+import java.io.*;
+
 public class Silver{
-    int[][] map;
+    char[][] map;
     int[][] startend;
+    int time;
+    int startx;
+    int starty;
+    int endx;
+    int endy;
 
     public Silver(String filename){
 	readFile(filename);
     }
+    
     public void readFile(String filename){
         File instructions = new File(filename);
         try{
             Scanner lines = new Scanner(instructions);
             
-            Scanner lineOne = new Scanner(lines.nextLine());
-            int rows = lineOne.nextInt();
-            int cols = lineOne.nextInt();
-            map = new int[rows][cols];
-            
-            elevation = lineOne.nextInt();
-            int numInstrucs = lineOne.nextInt();
-            instrucs = new int[numInstrucs][3];
+       
+            int rows = lines.nextInt();
+            int cols = lines.nextInt();
+            map = new char[rows][cols];
+ 
+            time = lines.nextInt();
+            //System.out.println(lines.next().charAt(0));
+            //int numInstrucs = lineOne.nextInt();
+            // instrucs = new int[numInstrucs][3];
             
             for(int i=0; i<rows; i++){
+                String line = lines.next();
                 for(int j=0; j<cols; j++){
-                    map[i][j]=lines.nextInt();
+                  
+                    map[i][j]=line.charAt(j);
+                    
+                    //System.out.println(map[i][j]);
       
                 }
             }
-
-            for(int i=0; i<numInstrucs; i++){
-                for(int j=0; j<3; j++){
-                    instrucs[i][j] = lines.nextInt();
-                }
-            }
+            System.out.println(Arrays.deepToString(map));
+            
+            startx = Integer.parseInt(lines.next());
+            starty = Integer.parseInt(lines.next());
+            endx = Integer.parseInt(lines.next());
+            endy = Integer.parseInt(lines.next());
+    
             
         }catch (FileNotFoundException e){
             System.out.println("File not found");
         }
-        
     }
+        
+        public static void main(String[]args){
+            Silver s = new Silver("test1.in");
+            //System.out.println(b.makelake()+", 6, Gao, JiaQi");
+        }
+        
+    
 
 }
