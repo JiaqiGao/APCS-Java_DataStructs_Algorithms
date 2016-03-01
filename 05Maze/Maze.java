@@ -36,7 +36,7 @@ public class Maze{
 	    //System.out.println(cols); 
 	    
 	    lines = new Scanner(instructions);
-	    maze = new char[rows][cols];
+	    maze = new char[cols][rows];
 	    Scanner copy = new Scanner(instructions);
 	    
 	    for(int i=0; i<rows; i++){
@@ -46,7 +46,7 @@ public class Maze{
 			startx=i;
 			starty=j;
 		    }
-		    maze[i][j] = copyy.charAt(j);
+		    maze[j][i] = copyy.charAt(j);
 		}
 	    }
 	    /*
