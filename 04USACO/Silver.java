@@ -6,14 +6,12 @@ public class Silver{
     char[][] map;
     int[][] startend;
     int time;
-    int startx;
-    int starty;
-    int endx;
-    int endy;
+    int startx, starty, endx, endy;
 
     public Silver(String filename){
 	readFile(filename);
         print(map);
+        System.out.println(travel(startx,starty,time));
     }
     
     public void readFile(String filename){
@@ -53,6 +51,21 @@ public class Silver{
             System.out.println("File not found");
         }
     }
+
+public int travel(int row,int col,int time){
+	if (row<0 || row>=map.length || col<0 || col>=map[0].length ||
+            time<0 || String.valueOf(map[row][col])==""+'*') { 
+	    return 0;
+	}
+	if (time==0 && row==endx-1 && col==endy-1){ //finished / at end position
+	    return 1;
+	}	
+	return travel(row-1,col,time-1) +
+            travel(row+1,col,time-1) + //down
+	    travel(row,col+1,time-1) + //right
+	    travel(row,col-1,time-1); //left
+    }
+    
     public void print(char[][] m){
 	String print="";
 	for(int r=0; r<m.length; r++){
