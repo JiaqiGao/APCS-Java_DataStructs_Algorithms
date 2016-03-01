@@ -57,13 +57,13 @@ public int travel(int row,int col,int time){
             time<0 || String.valueOf(map[row][col])==""+'*') { 
 	    return 0;
 	}
-	if (time==0 && row==endx-1 && col==endy-1){ //finished / at end position
+	if (time==0 && row==endx-1 && col==endy-1){ 
 	    return 1;
 	}	
 	return travel(row-1,col,time-1) +
-            travel(row+1,col,time-1) + //down
-	    travel(row,col+1,time-1) + //right
-	    travel(row,col-1,time-1); //left
+            travel(row+1,col,time-1) + 
+	    travel(row,col+1,time-1) + 
+	    travel(row,col-1,time-1); 
     }
     
     public void print(char[][] m){
