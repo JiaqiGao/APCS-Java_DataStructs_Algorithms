@@ -13,6 +13,7 @@ public class Silver{
 
     public Silver(String filename){
 	readFile(filename);
+        print(map);
     }
     
     public void readFile(String filename){
@@ -40,7 +41,7 @@ public class Silver{
       
                 }
             }
-            System.out.println(Arrays.deepToString(map));
+            //System.out.println(Arrays.deepToString(map));
             
             startx = Integer.parseInt(lines.next());
             starty = Integer.parseInt(lines.next());
@@ -51,6 +52,19 @@ public class Silver{
         }catch (FileNotFoundException e){
             System.out.println("File not found");
         }
+    }
+    public void print(char[][] m){
+	String print="";
+	for(int r=0; r<m.length; r++){
+	    for(int c=0; c<m[r].length; c++){
+		if(m[r][c]<10){
+		    print+=" ";
+		}
+		print+=m[r][c]+" ";
+	    }
+	    print+="\n";
+	}
+	System.out.println(print);
     }
         
         public static void main(String[]args){
