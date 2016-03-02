@@ -11,9 +11,7 @@ public class Silver{
 
     public Silver(String filename){
 	readFile(filename);
-        print(map);
-        System.out.println(travel());
-        print(map);
+       
     }
     
     public void readFile(String filename){
@@ -114,6 +112,7 @@ public class Silver{
                 }
             }
         }
+        //System.out.println(map[endx][endy]);
         return map[endx][endy];
         /*
           if (row<0 || row>=map.length || col<0 || col>=map[0].length ||
@@ -148,10 +147,14 @@ public class Silver{
 	}
 	System.out.println(print);
     }
+
+    public void nameSolution(){
+        System.out.println(travel()+", 6, Gao, JiaQi");
+    }
         
     public static void main(String[]args){
         Silver s = new Silver("test1.in");
-        //System.out.println(b.makelake()+", 6, Gao, JiaQi");
+        s.nameSolution();
     }
         
     
