@@ -26,9 +26,6 @@ public class Silver{
             temp = new int[rows][cols];
  
             time = lines.nextInt();
-            //System.out.println(lines.next().charAt(0));
-            //int numInstrucs = lineOne.nextInt();
-            // instrucs = new int[numInstrucs][3];
             
             for(int i=0; i<rows; i++){
                 String line = lines.next();
@@ -38,10 +35,7 @@ public class Silver{
 		    }else{
 			map[i][j]=0;
 		    }
-                  
-                   
-                    
-                    //System.out.println(map[i][j]);
+  
       
                 }
             }
@@ -63,7 +57,6 @@ public class Silver{
     }
     
     public int travel(){
-        //int[][] temp = new int[map.length][map[0].length];
         //start by copying old map
        for(int r=0; r < map.length; r++){
 	    for(int c=0; c < map[0].length; c++){
@@ -112,25 +105,8 @@ public class Silver{
                 }
             }
         }
-        //System.out.println(map[endx][endy]);
         return map[endx][endy];
-        /*
-          if (row<0 || row>=map.length || col<0 || col>=map[0].length ||
-          time<0) { 
-          return 0;
-          }
-          if (time==0 && row==endx-1 && col==endy-1){ 
-          return 1;
-          }
-          if( String.valueOf(map[row][col])==""+'*'){
-          return 0;
-          }
-          }
-          return travel(row-1,col,time-1) +
-          travel(row+1,col,time-1) + 
-          travel(row,col+1,time-1) + 
-          travel(row,col-1,time-1);
-        */
+       
     }
     
     public void print(int[][] m){
@@ -154,6 +130,7 @@ public class Silver{
         
     public static void main(String[]args){
         Silver s = new Silver("test1.in");
+        //Silver s = new Silver("test2.in");
         s.nameSolution();
     }
         
