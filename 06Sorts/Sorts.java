@@ -44,8 +44,11 @@ public class Sorts{
             System.out.println(Arrays.toString(ary));
         }
     }
+    static void mergeSort(int[]ary){
+        System.out.println(Arrays.toString(merge(ary)));
+    }
     
-    static int[] mergeSort(int[]ary){
+    static int[] merge(int[]ary){
 	if(ary.length <= 1){
 	    return ary;
 	}
@@ -59,10 +62,10 @@ public class Sorts{
 	    right[count] = ary[i];
 	    count++;
 	}
-	return merge(mergeSort(left), mergeSort(right));
+	return mergeh(merge(left), merge(right));
      }
     
-    static int[] merge(int[]left, int[]right){
+    static int[] mergeh(int[]left, int[]right){
 	int[] acc = new int[left.length+right.length];
 	int leftcount = 0;
 	int rightcount = 0;
@@ -97,12 +100,12 @@ public class Sorts{
 	
 	
 
-    
+    /*
     public static void main(String[]args){
 	int[] tried = {2,7,5,-1,-2222};
         int[] tried2 = {2,-12, 99};
-	System.out.println(Arrays.toString(mergeSort(tried)));
-	/*
+	mergeSort(tried);
+	
         int[] tried3 = {2,3,4,2,1,7,5,-1,2222};
         selectionSort(tried);
 	bubbleSort(tried3);
