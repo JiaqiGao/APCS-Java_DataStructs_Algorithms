@@ -44,7 +44,12 @@ public class Sorts{
             System.out.println(Arrays.toString(ary));
         }
     }
-    static void mergeSort(int[]ary){
+    
+    public static String name(){
+    	return "6,Gao,JiaQi";     //  or    "6,Last,First"
+    }
+    
+    static void mergesort(int[]ary){
         System.out.println(Arrays.toString(merge(ary)));
     }
     
