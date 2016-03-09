@@ -29,7 +29,7 @@ public class Quick{
     }
     
     public static int quickselect(int[]data, int k){
-        return quickselect(data,k-1,0,data.length-1);
+        return quickselect(data,k,0,data.length-1);
     }
 
     private static int quickselect(int[]data, int k, int left, int right){
@@ -57,12 +57,13 @@ public class Quick{
         }
 
         */
-   
     /*
+    
     public static void main(String[]args){
         int[] data = {2,7,5,-1,-2222,2, -23};
-        System.out.println(quickselect(data, 2));
+        System.out.println(quickselect(data, 6));
     }
     */
+    
     
 }
