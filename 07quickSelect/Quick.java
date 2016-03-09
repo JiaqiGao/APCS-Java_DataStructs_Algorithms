@@ -8,9 +8,17 @@ public class Quick{
         /*first moves the randomly selected value to right so that we can move values less than selected to the left and do nothing if greater
          */
         swap(test,right,data);
-        
+        for (int i=left; i<right; i++){
+            if (data[i] < data[right]){
+                swap(i, left, data);
+                left++;
+                //right++;
+                //System.out.println(data[i]);
+            }
+        }
 	
-    
+        swap(left, right, data);
+        return first
     
     }
 
