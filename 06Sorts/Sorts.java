@@ -102,20 +102,56 @@ public class Sorts{
 	return acc; 
 	
     }
-	
-	
 
-    /*
-    public static void main(String[]args){
-	int[] tried = {2,7,5,-1,-2222};
-        int[] tried2 = {2,-12, 99};
-	mergeSort(tried);
+    private static int partition(int[]data, int left, int right){
+        int test = (int)(Math.random()*(right-left+1))+left;
+        swap(test,right,data);
+        for (int i=left; i<right; i++){
+            if (data[i] < data[right]){
+                swap(i, left, data);
+                left++;
+            }
+        }
 	
+        swap(left, right, data);
+        return left;
+    
+    }
+
+    public static void swap(int test, int right, int[] data){
+        int temp = data[right];
+        data[right] = data[test];
+        data[test] = temp;
+    }
+
+    static void quickSort(int[] data){
+        quickSort(data, 0, data.length-1);
+        System.out.println(Arrays.toString(data));
+    }
+
+    static void quickSort(int[] data, int left, int right){
+        if(right-left > 0){
+            int index = partition(data, left, right);
+            quickSort(data, left, index-1);
+            quickSort(data, index+1, right);
+            
+        }
+       
+    }
+    
+    
+
+    
+    public static void main(String[]args){
+	int[] tried = {2,22, -54, 7,55,-1,-2222};
+        int[] tried2 = {2,-12, 99};
+	quickSort(tried);
+        /*	
         int[] tried3 = {2,3,4,2,1,7,5,-1,2222};
         selectionSort(tried);
 	bubbleSort(tried3);
         insertionSort(tried2);	
     }
-    */
+  */
     }
 }
