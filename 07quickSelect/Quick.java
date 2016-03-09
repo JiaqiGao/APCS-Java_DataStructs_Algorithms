@@ -33,17 +33,17 @@ public class Quick{
     }
 
     private static int quickselect(int[]data, int k, int left, int right){
-        if (left <= right) {
-            int test = partition(data, left, right);
-            if (test == k) {
-                return data[k];
-            }
-            if (test > k) {
-                return quickselect(data, k, left, test-1);
-            }
-            return quickselect(data, k, test+1, right);
+        int test = partition(data, left, right);
+
+        if (test == k) {
+            return data[k];
         }
-        return Integer.MIN_VALUE;
+        if (test > k) {
+            return quickselect(data, k, left, test-1);
+        }
+        //randomly choose another number greater than prev index
+        return quickselect(data, k, test+1, right);
+        
     }
 
 
@@ -60,8 +60,8 @@ public class Quick{
    
 
     public static void main(String[]args){
-        int[] data = {2,7,5,-1,-2222,2};
-        System.out.println(quickselect(data, 1, 4, 6));
+        int[] data = {2,7,5,-1,-2222,2, -23};
+        System.out.println(quickselect(data, 2));
     }
     
 }
