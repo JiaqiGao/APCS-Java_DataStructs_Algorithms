@@ -58,10 +58,11 @@ public class Quick{
 
         */
    
-
+    /*
     public static void main(String[]args){
         int[] data = {2,7,5,-1,-2222,2, -23};
         System.out.println(quickselect(data, 2));
     }
+    */
     
 }
