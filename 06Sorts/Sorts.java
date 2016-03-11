@@ -103,30 +103,62 @@ public class Sorts{
 	
     }
 
-    private static int partition(int[]data, int left, int right){
+    private static void partition(int[]data, int left, int right){
         int test = (int)(Math.random()*(right-left+1))+left;
-        swap(test,right,data);
+	int keep = data[test];
+        int counter = 0; 
+	swap(test,right,data);
         for (int i=left; i<right; i++){
-            if (data[i] < data[right]){
-                swap(i, left, data);
-                left++;
-            }
-        }
-	
+            if (data[i] == data[right]){
+		counter++;
+	    }else{
+		if (data[i] < data[right]){
+		    swap(i, left, data);
+		    left++;
+		}
+	    }
+        }	
         swap(left, right, data);
-        return left;
-    
+	
+	int moveup = 0;
+	int[] nuevo = new int[data.length];
+	for(int i=0; i<data.length; i++){
+	    if (i+moveup >= data.length){
+		nuevo[i] = 0; 
+	    }else{
+		if(data[i] == keep){
+		    moveup++;
+		}
+		nuevo[i] = data[i+moveup];
+	    }
+	}
+	System.out.println(keep);
+	System.out.println(moveup);
+	System.out.println(Arrays.toString(nuevo));
+       
+	// return left;
     }
-
+    /*
+    private static int quickselect(int[]data, int k, int left, int right){
+        int test = partition(data, left, right);
+        if (test == k) {
+            return data[k];
+        }
+        if (test > k) {
+            return quickselect(data, k, left, test-1);
+        }
+        return quickselect(data, k, test+1, right);    
+    }
+    */
     public static void swap(int test, int right, int[] data){
         int temp = data[right];
         data[right] = data[test];
         data[test] = temp;
     }
-
+    /*
     static void quickSort(int[] data){
         quickSort(data, 0, data.length-1);
-        System.out.println(Arrays.toString(data));
+        //System.out.println(Arrays.toString(data));
     }
 
     static void quickSort(int[] data, int left, int right){
@@ -139,13 +171,20 @@ public class Sorts{
        
     }
     
-    
+    */
 
     
     public static void main(String[]args){
-	int[] tried = {2,22, -54, 7,55,-1,-2222};
-        int[] tried2 = {2,-12, 99};
-	quickSort(tried);
+	int[] tried = new int[40000];
+	for(int i=0; i<40000; i++){
+	    tried[i] = (int)(Math.random()*Integer.MAX_VALUE)-(int)(Math.random()*Integer.MIN_VALUE);
+	     
+	   
+	 }
+        int[] tried2 = {2, 2, 9, 2};
+	partition(tried2, 0, tried2.length-1);
+	//System.out.println("cps time");
+	//Arrays.sort(tried);
         /*	
         int[] tried3 = {2,3,4,2,1,7,5,-1,2222};
         selectionSort(tried);
