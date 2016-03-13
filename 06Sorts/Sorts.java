@@ -157,58 +157,54 @@ public class Sorts{
 
     private static int[] partition(int[]data, int left, int right){
         int test = (int)(Math.random()*(right-left+1))+left;
-        int op = data[test];
-        int oldleft = left;
-       
-        int counter = 0;
-        int[] instance = new int[data.length];
-        swap(test,right,data);
-        for (int i=left; i<right; i++){
-            if(data[i] == data[right]){
-                instance[counter] = i;
-                counter++;
-            }
-            if (data[i] <= data[right]){
-                swap(i, left, data);
-                left++;
-            }
-        }
-        swap(left, right, data);
-        int[] index = new int[2];
-        index[1] = left; 
-     
-        int counter2 = counter;
-        d(op);
-        d(left);
-        d(counter);
-        d(instance);
-        d(index[1]);
-        for(int i=0; i<counter; i++){
-            swap(instance[i], index[1]-i-1, data);
-        }
+	swap(data,test,right);
 
-                
-        index[0] = index[1]-1-(counter-counter2+1);
-        
-        d(data);
-        
-        return index;
+	int f = left;
+	int t = right-1;
+	while(f < t){
+	    if(data[f] < data[right]){
+		f++;
+	    }else{
+		swap(data,f,t);
+		t--;
+	    }
+	}
+
+	int[] index = new int[2];
+	if(data[f] < data[right]){
+	    f++;
+	}
+	    swap(data,f,right);
+	    
+	
+	index[0]=f;
+	
+	int stored=data[f];
+	for(int i=f; i<right; i++){
+	    if(data[i] == stored){
+		swap(data,i,f);
+		index[1] = f;
+		f++;
+	    }
+	}
+	return index;
+       
         
     }
     
-    public static void swap(int test, int right, int[] data){
-        int temp = data[right];
-        data[right] = data[test];
-        data[test] = temp;
+    public static void swap(int[]data, int a, int b){
+	int store = data[a];
+	data[a]=data[b];
+	data[b]=store;
     }
     
     static void quickSort(int[] data){
         quickSort(data, 0, data.length-1);
-        System.out.println(Arrays.toString(data));
+        d(data);
     }
 
     static void quickSort(int[] data, int left, int right){
-        if(right-left > 0){
+        if(right-left+1>1 && left>=0 && right<data.length){
             int[] index = partition(data, left, right);
             quickSort(data, left, index[0]-1);
             quickSort(data, index[1]+1, right);
@@ -228,8 +224,8 @@ public class Sorts{
 	   
 	 }
         int[] tried2 = {2, 2, 9, 2, 1};
-        //quickSort(tried2);
-	partition(tried2, 0, tried2.length-1);
+        quickSort(tried2);
+	//partition(tried2, 0, tried2.length-1);
 	//System.out.println("cps time");
 	//Arrays.sort(tried);
         /*	
