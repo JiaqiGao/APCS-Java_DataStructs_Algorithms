@@ -135,7 +135,7 @@ public class Sorts{
 
     static void quickSortOld(int[] data){
         quickSortOld(data, 0, data.length-1);
-        System.out.println(Arrays.toString(data));
+        //System.out.println(Arrays.toString(data));
     }
 
     static void quickSortOld(int[] data, int left, int right){
@@ -148,12 +148,6 @@ public class Sorts{
        
     }
     //--------------------------------------------------------
-    private static void d(int k){
-        System.out.println(k);
-    }
-    private static void d (int[] k){
-        System.out.println(Arrays.toString(k));
-    }
 
     private static int[] partition(int[]data, int left, int right){
         int test = (int)(Math.random()*(right-left+1))+left;
@@ -174,10 +168,11 @@ public class Sorts{
 	if(data[f] < data[right]){
 	    f++;
 	}
-	    swap(data,f,right);
+	swap(data,f,right);
 	    
 	
-	index[0]=f;
+	index[0] = f;
+        index[1] = f;
 	
 	int stored=data[f];
 	for(int i=f; i<right; i++){
@@ -200,7 +195,7 @@ public class Sorts{
     
     static void quickSort(int[] data){
         quickSort(data, 0, data.length-1);
-        d(data);
+        //d(data);
     }
 
     static void quickSort(int[] data, int left, int right){
@@ -217,23 +212,33 @@ public class Sorts{
 
     
     public static void main(String[]args){
-	int[] tried = new int[40000];
-	for(int i=0; i<40000; i++){
-	    tried[i] = (int)(Math.random()*Integer.MAX_VALUE)-(int)(Math.random()*Integer.MIN_VALUE);
-	     
-	   
-	 }
-        int[] tried2 = {2, 2, 9, 2, 1};
-        quickSort(tried2);
-	//partition(tried2, 0, tried2.length-1);
-	//System.out.println("cps time");
-	//Arrays.sort(tried);
-        /*	
-        int[] tried3 = {2,3,4,2,1,7,5,-1,2222};
-        selectionSort(tried);
-	bubbleSort(tried3);
-        insertionSort(tried2);	
-    }
-  */
+        int[]a = new int [4000000];
+        int[]b = new int [a.length];
+        
+        
+        for(int i = 0; i < a.length; i++){
+	    a[i] = (int)(Math.random()*3);
+            b[i] =(int)(Math.random()*Integer.MAX_VALUE)+(int)(Math.random()*Integer.MIN_VALUE);
+        
+	}
+        Arrays.sort(a);
+        /*
+        quickSortOld(a);
+        quickSort(a);
+        Arrays.sort(b);
+        quickSortOld(b);
+        quickSort(b);
+        */
+        /*
+        int[] d = new int [400000];
+	int[] c = new int [d.length];
+	for(int i = 0; i < d.length; i++){
+	    d[i]= (int)(Math.random()*Integer.MAX_VALUE);
+	    c[i]= d[i];
+	}
+	quickSortOld(d); //or even your old quicksort!!!
+	Arrays.sort(c);
+	System.out.println("Done: Sorted="+Arrays.equals(d,c));
+        */
     }
 }
