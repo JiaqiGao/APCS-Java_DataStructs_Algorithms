@@ -157,104 +157,67 @@ public class Sorts{
 
     private static int[] partition(int[]data, int left, int right){
         int test = (int)(Math.random()*(right-left+1))+left;
-	int keep = data[test];
-
-        System.out.println(keep);
-        
-        int counter = 0; 
-	swap(test,right,data);
-        int swaps = 0;
+        int op = data[test];
+        int oldleft = left;
+       
+        int counter = 0;
+        int[] instance = new int[data.length];
+        swap(test,right,data);
         for (int i=left; i<right; i++){
-            if (data[i] == data[right]){         
-		counter++;
-                
-	    }
-            if (data[i] < data[right]){
+            if(data[i] == data[right]){
+                instance[counter] = i;
+                counter++;
+            }
+            if (data[i] <= data[right]){
                 swap(i, left, data);
                 left++;
             }
         }
-          	
         swap(left, right, data);
-
-        d(data);
-   
-	int moveup = 0;
+        int[] index = new int[2];
+        index[1] = left; 
+     
+        int counter2 = counter;
+        d(op);
+        d(left);
         d(counter);
-	int[] nuevo = new int[data.length];
-        for(int i=0; i<left; i++){
-            if(i+moveup < left){
-                while(data[i+moveup] == keep){
-                    moveup++;
-                }
-                nuevo[i] = data[i+moveup];
-            }else{
-                // nuevo[i] = keep;
-            }
+        d(instance);
+        d(index[1]);
+        for(int i=0; i<counter; i++){
+            swap(instance[i], index[1]-i-1, data);
+        }
+
                 
-        }
-        for(int i=left; i<data.length; i++){
-            nuevo[i] = data[i];
-        }
-        d(test);
-        d(nuevo);
-        /*
-        int start = 0;
-        int backtrack = 0;
-	for(int i=counter; i<data.length-1; i++){
-            if(data[i+counter-1] == keep){
-                start = i+counter-1;
-                nuevo[i] = keep;
-                backtrack++;
-            }else{
-                nuevo[i] = data[i+counter-backtrack-1];
-            }
-        }
-        int[] pivots = new int[2];
-        pivots[1] = start;
-        pivots[2] = left;
+        index[0] = index[1]-1-(counter-counter2+1);
         
+        d(data);
         
-        return pivots;
-	*/
-        return nuevo;
-       
-	// return left;
+        return index;
+        
     }
-    /*
-    private static int quickselect(int[]data, int k, int left, int right){
-        int test = partition(data, left, right);
-        if (test == k) {
-            return data[k];
-        }
-        if (test > k) {
-            return quickselect(data, k, left, test-1);
-        }
-        return quickselect(data, k, test+1, right);    
-    }
-    */
+    
     public static void swap(int test, int right, int[] data){
         int temp = data[right];
         data[right] = data[test];
         data[test] = temp;
     }
-    /*
+    
     static void quickSort(int[] data){
         quickSort(data, 0, data.length-1);
-        //System.out.println(Arrays.toString(data));
+        System.out.println(Arrays.toString(data));
     }
 
     static void quickSort(int[] data, int left, int right){
         if(right-left > 0){
-            int index = partition(data, left, right);
-            quickSort(data, left, index-1);
-            quickSort(data, index+1, right);
+            int[] index = partition(data, left, right);
+            quickSort(data, left, index[0]-1);
+            quickSort(data, index[1]+1, right);
             
         }
        
     }
     
-    */
+    
 
     
     public static void main(String[]args){
@@ -265,6 +228,7 @@ public class Sorts{
 	   
 	 }
         int[] tried2 = {2, 2, 9, 2, 1};
+        //quickSort(tried2);
 	partition(tried2, 0, tried2.length-1);
 	//System.out.println("cps time");
 	//Arrays.sort(tried);
