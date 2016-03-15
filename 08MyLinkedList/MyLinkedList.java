@@ -38,10 +38,11 @@ public class MyLinkedList{
     }
 
     private class LNode{
-	int[] data;
+	int data;
+	LNode next;
 	
-	public LNode(){
-	    data = new int[2];
+	public LNode(int value){
+	    data = value;
 	}
     }
 
