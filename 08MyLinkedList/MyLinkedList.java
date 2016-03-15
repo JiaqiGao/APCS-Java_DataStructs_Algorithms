@@ -3,17 +3,19 @@ import java.util.*;
 import java.io.*;
 
 public class MyLinkedList{
-    private LNode start;
-    private int size;
-
+    LNode start;
+    int size;
+    
     public MyLinkedList(){
-	start = new LNode(null);
 	size = 0;
+	start = new LNode(null);
+	
     }
-
+    /*
     private boolean add(int value){
 	LNode current = start;
 	LNode temp = new LNode(value);
+	
 	while (current.getNext() != null){
 	    current = current.getNext();
 	}
@@ -22,7 +24,33 @@ public class MyLinkedList{
 	return true;
         //current = current.getNext();
     }
+    */
     
+    public String toString(){
+	String total = "[";
+	LNode tracker = new LNode(start);
+	total += tracker;
+	while(tracker.getNext() != null){
+	    total += tracker.getNext();
+	    tracker = tracker.getNext();
+	}
+	return total; 
+    }
+
+    private class LNode{
+	int[] data;
+	
+	public LNode(){
+	    data = new int[2];
+	}
+    }
+
+
+    public static void main(String[]args){
+	MyLinkedList m = new MyLinkedList();
+	System.out.println(m);
+    }
+
   /*
   
   int get(int index)- get the value of the element at the specified index (0 based)
@@ -35,7 +63,6 @@ public class MyLinkedList{
   
   boolean add(int index, int value) - insert a new elmeent at the specified index, 0 at the front, size() at the end.
   
- CHECK boolean add(int value) - adds to end
   
   int indexOf(int value) - returns the index of the 1st occurrence of the value in the linked list, -1 if not found.
   
