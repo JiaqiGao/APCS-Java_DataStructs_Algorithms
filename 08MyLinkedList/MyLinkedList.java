@@ -3,8 +3,26 @@ import java.util.*;
 import java.io.*;
 
 public class MyLinkedList{
-  private LNode start;
-  private int size;
+    private LNode start;
+    private int size;
+
+    public MyLinkedList(){
+	start = new LNode(null);
+	size = 0;
+    }
+
+    private boolean add(int value){
+	LNode current = start;
+	LNode temp = new LNode(value);
+	while (current.getNext() != null){
+	    current = current.getNext();
+	}
+	current.setNext(temp);
+	size++;
+	return true;
+        //current = current.getNext();
+    }
+    
   /*
   
   int get(int index)- get the value of the element at the specified index (0 based)
@@ -17,7 +35,7 @@ public class MyLinkedList{
   
   boolean add(int index, int value) - insert a new elmeent at the specified index, 0 at the front, size() at the end.
   
-  boolean add(int value) - adds to end
+ CHECK boolean add(int value) - adds to end
   
   int indexOf(int value) - returns the index of the 1st occurrence of the value in the linked list, -1 if not found.
   
