@@ -3,15 +3,15 @@ import java.util.*;
 import java.io.*;
 
 public class MyLinkedList{
-    LNode start;
-    int size;
+    private LNode start;
+    private int size;
     
     public MyLinkedList(){
 	size = 0;
 	start = new LNode(null);
 	
     }
-    /*
+    
     private boolean add(int value){
 	LNode current = start;
 	LNode temp = new LNode(value);
@@ -24,16 +24,18 @@ public class MyLinkedList{
 	return true;
         //current = current.getNext();
     }
-    */
+    
     
     public String toString(){
 	String total = "[";
-	LNode tracker = new LNode(start);
-	total += tracker;
-	while(tracker.getNext() != null){
-	    total += tracker.getNext();
+	LNode tracker = start.getNext();
+	while(tracker != null){
+            //LNode temp = tracker.getNext();
+	    total += tracker.getData().toString();
 	    tracker = tracker.getNext();
 	}
+        total += "]";
+        //System.out.println(total);
 	return total; 
     }
 
@@ -67,7 +69,9 @@ public class MyLinkedList{
 
     public static void main(String[]args){
 	MyLinkedList m = new MyLinkedList();
-	System.out.println(m);
+        m.add(5);
+        System.out.println(m);
+	
     }
 
   /*
