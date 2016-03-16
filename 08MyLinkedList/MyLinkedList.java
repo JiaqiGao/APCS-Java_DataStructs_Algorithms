@@ -38,12 +38,30 @@ public class MyLinkedList{
     }
 
     private class LNode{
-	int data;
+	Object data;
 	LNode next;
 	
-	public LNode(int value){
-	    data = value;
+	public LNode(Object dat){
+	    data = dat;
+            next = null;
 	}
+        
+        public Object getData(){
+            return data;
+        }
+
+        public LNode getNext(){
+            return next;
+        }
+      
+        public void setData(Object dat){
+            data = dat;
+        }
+
+        public void setNext(LNode nex){
+            next = nex;
+        }
+        
     }
 
 
