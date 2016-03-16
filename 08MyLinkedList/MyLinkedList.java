@@ -27,18 +27,76 @@ public class MyLinkedList{
     
     
     public String toString(){
-	String total = "[";
+	String total = "[ ";
 	LNode tracker = start.getNext();
 	while(tracker != null){
             //LNode temp = tracker.getNext();
 	    total += tracker.getData().toString();
+            if(tracker.getNext() != null){
+                total += ", ";
+            }
 	    tracker = tracker.getNext();
 	}
-        total += "]";
+        total += " ]";
         //System.out.println(total);
 	return total; 
     }
 
+    public int get(int index){
+        LNode current = start.getNext();
+        for(int i=0; i<index; i++){
+            current = current.getNext();
+        }
+        return (int)current.getData();
+    }
+
+    public int set(int index, int indexValue){
+        LNode current = start.getNext();
+        for(int i=0; i<index; i++){
+            current = current.getNext();
+        }
+        int tracker = (int)current.getData();
+        current.setData(indexValue);
+        
+        return tracker;
+    }
+
+    public int size(){
+        return size;
+    }
+
+    public int remove(int index){
+        return -1;
+        //not sure if we turn it to null or take it out completely
+    }
+
+    public boolean add(int index, int value){
+        int temp = set(index, value);
+        LNode current = start.getNext();
+        for(int i=0; i<index; i++){
+            current = current.getNext(); 
+        }
+        for(int i=index+1; i<size(); i++){
+            temp = set(i, temp);
+        }
+        return true;
+    }
+
+    public int indexOf(int value){
+        LNode current = start.getNext();
+        for(int i=0; i<size(); i++){
+            if(current.getData() != null){
+                if((int)current.getData()==value){
+                    return i;
+                }
+            }
+            current = current.getNext(); 
+        }
+        return -1;
+    }
+    
+    //----------------------------------------------
+    
     private class LNode{
 	Object data;
 	LNode next;
@@ -66,11 +124,15 @@ public class MyLinkedList{
         
     }
 
+    //----------------------------------------------------
 
     public static void main(String[]args){
 	MyLinkedList m = new MyLinkedList();
         m.add(5);
+        m.add(11);
+        m.add(1,18);
         System.out.println(m);
+        System.out.println(m.indexOf(18));
 	
     }
 
@@ -88,7 +150,6 @@ public class MyLinkedList{
   
   
   int indexOf(int value) - returns the index of the 1st occurrence of the value in the linked list, -1 if not found.
-  
-  toString() - returns a list formatted like: [ v1, v2, v3, ... vn-1, vn ]
+
 */
 }
