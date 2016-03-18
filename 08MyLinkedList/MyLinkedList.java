@@ -8,6 +8,9 @@ public class MyLinkedList{
     public MyLinkedList(){
 	
     }
+    /*
+    make size() and add(v) to constant time by making a variable for index of last element
+    */
     
     public boolean add(int value){
 	if(start == null){
