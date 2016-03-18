@@ -73,6 +73,10 @@ public class MyLinkedList{
        
     }
 
+/*
+	modifying front makes it O(1); the ideal senario for using linked list or adding to end
+*/
+
     public boolean add(int index, int value){
         int temp = set(index, value);
         LNode current = start.getNext();
