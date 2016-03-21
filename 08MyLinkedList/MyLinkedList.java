@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-public class MyLinkedList{
+public class MyLinkedList<T>{
     private LNode start;
     private int size;
     
@@ -11,7 +11,7 @@ public class MyLinkedList{
     /*
     make size() and add(v) to constant time by making a variable for index of last element
     */
-    
+    /*
     public boolean add(int value){
 	if(start == null){
 	    start = new LNode(value);
@@ -72,10 +72,12 @@ public class MyLinkedList{
         return -1;
        
     }
+    
 
 /*
 	modifying front makes it O(1); the ideal senario for using linked list or adding to end
 */
+    /*
 
     public boolean add(int index, int value){
         int temp = set(index, value);
@@ -101,18 +103,18 @@ public class MyLinkedList{
         }
         return -1;
     }
+*/
  
     //----------------------------------------------
     
     private class LNode<T>{
 	private T data;
-	LNode next;
+	private LNode next;
 	
 	public LNode(){
-	    
 	}
         
-        public int getData(){
+        public T getData(){
             return data;
         }
 
@@ -125,7 +127,7 @@ public class MyLinkedList{
         }
 
         public void setNext(LNode nex){
-            next = nex;
+            next.set(new LNode(nex));
         }
         
     }
@@ -133,13 +135,15 @@ public class MyLinkedList{
     //----------------------------------------------------
 
     public static void main(String[]args){
-	MyLinkedList m = new MyLinkedList();
+	MyLinkedList<Integer> m = new MyLinkedList<Integer>();
+	/*
         m.add(5);
         m.add(11);
 	System.out.println(m);
         m.add(1,18);
         System.out.println(m);
         System.out.println(m.indexOf(18));
+	*/
 	
     }
 
