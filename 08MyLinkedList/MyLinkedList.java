@@ -101,15 +101,15 @@ public class MyLinkedList{
         }
         return -1;
     }
-    
+ 
     //----------------------------------------------
     
-    private class LNode{
-	int data;
+    private class LNode<T>{
+	private T data;
 	LNode next;
 	
-	public LNode(int dat){
-	    data = dat;
+	public LNode(){
+	    
 	}
         
         public int getData(){
@@ -120,8 +120,8 @@ public class MyLinkedList{
             return next;
         }
       
-        public void setData(int dat){
-            data = dat;
+        public void setData(T dat){
+            data.set(new Integer(dat));
         }
 
         public void setNext(LNode nex){
