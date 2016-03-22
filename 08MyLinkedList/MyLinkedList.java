@@ -143,7 +143,7 @@ public class MyLinkedList<T>{
     }
 
     //----------------------------------------------------
-
+/*
     public static void main(String[]args){
 	MyLinkedList<Integer> m = new MyLinkedList<Integer>();
 	
@@ -154,6 +154,6 @@ public class MyLinkedList<T>{
        
 	
     }
-
+*/
 }
 
