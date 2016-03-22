@@ -92,13 +92,16 @@ public class MyLinkedList<T>{
 	    start = new LNode<T>(value);
 	}else{
 	    LNode<T> current = start.getNext();			
-	    for (int i=0; i<index; i++){
+	    for (int i=0; i<=index; i++){
 		current = current.getNext();
 	    }
 	    LNode<T> temp = new LNode<T>(value);
             
 	    current.setNext(temp.getNext());
 	    current.setNext(temp);
+	    if(index == size){
+		
+	    }
 	}
 	size++;
         
@@ -149,7 +152,7 @@ public class MyLinkedList<T>{
     }
 
     //----------------------------------------------------
-/*
+
     public static void main(String[]args){
 	MyLinkedList<Integer> m = new MyLinkedList<Integer>();
 	
@@ -160,6 +163,6 @@ public class MyLinkedList<T>{
        
 	
     }
-*/
+
 }
 
