@@ -2,27 +2,25 @@ import java.util.*;
 import java.io.*;
 
 public class MyLinkedList<T>{
-    private LNode start;
+    private LNode<T> start;
+    private LNode<T> end;
     private int size;
     
     public MyLinkedList(){
 	
     }
-    /*
-    make size() and add(v) to constant time by making a variable for index of last element
-    */
-    /*
+  
+   
     public boolean add(int value){
 	if(start == null){
-	    start = new LNode(value);
+            end = start;
+	    start = new LNode<T>(value);
 	}else{
-	    LNode p = start; 
-	    while(p.getNext()!=null){
-		p = p.getNext();
-	    }
-	    p.setNext(new LNode(value));
+	    end.setNext(new LNode<T>(value));
+	    end = end.getNext();
 	}
-	size+=1;
+        
+	size++;
 	return true;
     }
     
@@ -42,7 +40,7 @@ public class MyLinkedList<T>{
     }
 
     public int get(int index){
-        LNode current = start.getNext();
+        LNode<T> current = start;
         for(int i=0; i<index; i++){
             current = current.getNext();
         }
@@ -50,18 +48,15 @@ public class MyLinkedList<T>{
     }
 
     public int set(int index, int indexValue){
-        LNode current = start.getNext();
-	int tracker=0;
+        LNode<T> current = start.getNext();
+	//int tracker=0;
         for(int i=0; i<index; i++){
-	    tracker = current.getData();
-            if(current.getNext() != null){
-		    current = current.getNext();
-		}
+	    current = current.getNext();
         }
+        T save = current.getValue;
+        current.setValue(indexValue);
         
-        current.setData(indexValue);
-        
-        return tracker;
+        return save;
     }
 
     public int size(){
@@ -69,15 +64,19 @@ public class MyLinkedList<T>{
     }
 
     public int remove(int index){
-        return -1;
+        LNode<T> current = start;
+	for (int i = 0; i < index - 1; i++){
+	    p = p.getNext();
+	}
+	LNode<T> q = p.getNext();
+	T ans = q.getValue();
+	q = q.getNext(); 
+	p.setNext(q);
+	size --;
+	return ans;
        
     }
     
-
-/*
-	modifying front makes it O(1); the ideal senario for using linked list or adding to end
-*/
-    /*
 
     public boolean add(int index, int value){
         int temp = set(index, value);
@@ -88,6 +87,7 @@ public class MyLinkedList<T>{
         for(int i=index+1; i<size(); i++){
             temp = set(i, temp);
         }
+        size++;
         return true;
     }
 
@@ -103,7 +103,7 @@ public class MyLinkedList<T>{
         }
         return -1;
     }
-*/
+
  
     //----------------------------------------------
     
@@ -111,23 +111,24 @@ public class MyLinkedList<T>{
 	private T data;
 	private LNode next;
 	
-	public LNode(){
+	public LNode(T data){
+            this.data = data;
 	}
         
         public T getData(){
             return data;
         }
 
-        public LNode getNext(){
+        public LNode<T> getNext(){
             return next;
         }
       
-        public void setData(T dat){
-            data.set(new Integer(dat));
+        public void setData(T data){
+            this.data = data;
         }
 
         public void setNext(LNode nex){
-            next.set(new LNode(nex));
+            next = nex;
         }
         
     }
