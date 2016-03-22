@@ -2,9 +2,9 @@ import java.util.*;
 import java.io.*;
 
 public class MyLinkedList<T>{
-    private LNode<T> start;
-    private LNode<T> end;
-    private int size;
+    LNode<T> start;
+    LNode<T> end;
+    int size;
     
     public MyLinkedList(){
 	
@@ -27,7 +27,7 @@ public class MyLinkedList<T>{
     
     public String toString(){
 	String total = "[ ";
-	LNode tracker = start.getNext();
+	LNode<T> tracker = start.getNext();
 	while(tracker != null){
 	    total += tracker.getData();
             if(tracker.getNext() != null){
@@ -104,10 +104,10 @@ public class MyLinkedList<T>{
 	if (current.getNext() == null){
 	    return -1;
 	}
-	return i;
+	return counter;
 	
     }
-
+    
  
     //----------------------------------------------
     
@@ -140,15 +140,15 @@ public class MyLinkedList<T>{
     //----------------------------------------------------
 
     public static void main(String[]args){
-	MyLinkedList<Integer> m = new MyLinkedList<Integer>();
-	/*
+	MyLinkedList<Integer> m = new MyLinkedList();
+	
         m.add(5);
         m.add(11);
 	System.out.println(m);
         m.add(1,18);
         System.out.println(m);
         System.out.println(m.indexOf(18));
-	*/
+       
 	
     }
 
