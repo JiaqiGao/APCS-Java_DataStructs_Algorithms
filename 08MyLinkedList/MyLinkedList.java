@@ -10,7 +10,6 @@ public class MyLinkedList<T>{
 	
     }
   
-   
     public boolean add(T value){
 	if(start == null){
             end = start;
@@ -24,6 +23,13 @@ public class MyLinkedList<T>{
 	return true;
     }
     
+    public String toString(boolean choice){
+	if(choice==true){
+	    return "works";
+	}else{
+	    return "nevermind";
+	}
+    }
     
     public String toString(){
 	String total = "[ ";
@@ -83,13 +89,13 @@ public class MyLinkedList<T>{
 
     public boolean add(int index, T value){
         if(start == null){
-	    start = new LNode(value);
+	    start = new LNode<T>(value);
 	}else{
 	    LNode<T> current = start.getNext();			
 	    for (int i=0; i<index; i++){
 		current = current.getNext();
 	    }
-	    LNode<T> temp = new LNode(value);
+	    LNode<T> temp = new LNode<T>(value);
             
 	    current.setNext(temp.getNext());
 	    current.setNext(temp);
@@ -118,7 +124,7 @@ public class MyLinkedList<T>{
     
     private class LNode<T>{
 	private T data;
-	private LNode next;
+	private LNode<T> next;
 	
 	public LNode(T data){
             this.data = data;
@@ -136,7 +142,7 @@ public class MyLinkedList<T>{
             this.data = data;
         }
 
-        public void setNext(LNode nex){
+        public void setNext(LNode<T> nex){
             next = nex;
         }
         
