@@ -39,7 +39,7 @@ public class MyLinkedList<T>{
 	return total; 
     }
 
-    public int get(int index){
+    public T get(int index){
         LNode<T> current = start;
         for(int i=0; i<index; i++){
             current = current.getNext();
@@ -47,7 +47,7 @@ public class MyLinkedList<T>{
         return current.getData();
     }
 
-    public int set(int index, int indexValue){
+    public T set(int index, int indexValue){
         LNode<T> current = start.getNext();
 	//int tracker=0;
         for(int i=0; i<index; i++){
@@ -63,17 +63,20 @@ public class MyLinkedList<T>{
         return size;
     }
 
-    public int remove(int index){
+    public T remove(int index){
         LNode<T> current = start;
-	for (int i = 0; i < index - 1; i++){
-	    p = p.getNext();
+	for (int i=0; i<index-1; i++){
+	    current = current.getNext();
 	}
-	LNode<T> q = p.getNext();
-	T ans = q.getValue();
-	q = q.getNext(); 
-	p.setNext(q);
-	size --;
-	return ans;
+	LNode<T> temp = current.getNext();
+	T save = temp.getValue();
+        
+	temp = temp.getNext(); 
+	current.setNext(temp);
+	size--;
+        
+        
+	return save;
        
     }
     
@@ -92,16 +95,17 @@ public class MyLinkedList<T>{
     }
 
     public int indexOf(int value){
-        LNode current = start.getNext();
-        for(int i=0; i<size()-1; i++){
-            if(current.getNext() != null){
-                if(current.getData()==value){
-                    return i;
-                }
-            }
-            current = current.getNext(); 
-        }
-        return -1;
+        LNode<T> current = start;
+	int counter = 0;
+	while (current.getValue() != value && current.getNext() != null){
+	    current = current.getNext();
+	    counter++;
+	}
+	if (current.getNext() == null){
+	    return -1;
+	}
+	return i;
+	
     }
 
  
