@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-public class MyLinkedList<T>{
+public class MyLinkedList<T> implements Iterable<T>{
     LNode<T> start;
     LNode<T> end;
     int size;
@@ -120,6 +120,14 @@ public class MyLinkedList<T>{
 	}
 	return counter;
 	
+    }
+    
+    public class x implements Iterator<T>{
+    	LNode current;
+    }
+    
+    public Iterator<T> interator(){
+    	//return new x 
     }
     
  
