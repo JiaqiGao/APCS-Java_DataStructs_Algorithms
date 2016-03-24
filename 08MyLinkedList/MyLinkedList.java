@@ -1,5 +1,4 @@
 import java.util.*;
-import java.io.*;
 
 public class MyLinkedList<T> implements Iterable<T>{
     LNode start;
@@ -38,9 +37,8 @@ public class MyLinkedList<T> implements Iterable<T>{
 		copy += ", "+current.getData();
 	    }
 	    copy += "]";
-	    
-	    total+= " Head: "+
-                (String)start.getData() + " End: "+
+	    total+= "Head: "+
+                (String)start.getData() + "End: "+
                 (String)end.getData();
 
 	    total = copy+total;
@@ -62,18 +60,18 @@ public class MyLinkedList<T> implements Iterable<T>{
 	return total; 
     }
 
-    public T get(int index){
-        if(index < 0 || index > size-1){
-	    throw new IndexOutOfBoundsException();
-	}
-       
-            LNode current = start;
-            for(int i=0; i<index; i++){
-                current = current.getNext();
-            }
-            return current.getData();
-        
-    }
+	    public T get(int index){
+	        if(index < 0 || index > size-1){
+		    throw new IndexOutOfBoundsException();
+		}
+	       
+	            LNode current = start;
+	            for(int i=0; i<index; i++){
+	                current = current.getNext();
+	            }
+	            return current.getData();
+	        
+	    }
 
     public T set(int index, T indexValue){
         if(index < 0 || index > size-1){
