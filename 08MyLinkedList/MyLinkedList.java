@@ -173,24 +173,24 @@ public class MyLinkedList<T> implements Iterable<T>{
 	
     }
      public Iterator<T> iterator(){
-    	return new MyLinkedListIterator(this);       
+    	return new MyLinkedListIterator();       
     }
      
     public class MyLinkedListIterator implements Iterator<T>{
         LNode current;
         
-        public MyLinkedListIterator(MyLinkedList<T> st){
-            current = st.start;
+        public MyLinkedListIterator(){
+            current = start;
         }
         
     	public boolean hasNext(){
-            if (current.getNext() != null) {
-                return true;
-            }
-            return false;
+            return next != null;
         }
 
         public T next(){
+	if(!hasNext()){
+		throw new NoSuchElementException();
+	}
             T temp = current.getData();
             current = current.getNext();
             return temp;
