@@ -38,7 +38,7 @@ public class MyLinkedList<T> implements Iterable<T>{
 	    }
 	    copy += "]";
 	    total+= "Head: "+
-                (String)start.getData() + "End: "+
+                (String)start.getData() + " End: "+
                 (String)end.getData();
 
 	    total = copy+total;
@@ -184,7 +184,7 @@ public class MyLinkedList<T> implements Iterable<T>{
         }
         
     	public boolean hasNext(){
-            return next != null;
+            return current != null;
         }
 
         public T next(){
