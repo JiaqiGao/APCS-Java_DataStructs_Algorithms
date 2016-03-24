@@ -13,7 +13,7 @@ public class MyLinkedList<T> implements Iterable<T>{
 	if(start == null){
            
 	    start = new LNode(value);
-             end = start;
+	    end = start;
 	}else{
 	    end.setNext(new LNode(value));
 	    end = end.getNext();
@@ -26,7 +26,7 @@ public class MyLinkedList<T> implements Iterable<T>{
     public String toString(boolean choice){
 	String total = "";
         if(choice){
-           String copy="[";
+	    String copy="[";
 	    if(size!=0){
 		copy+=start.getData();
 	    }
@@ -60,18 +60,18 @@ public class MyLinkedList<T> implements Iterable<T>{
 	return total; 
     }
 
-	    public T get(int index){
-	        if(index < 0 || index > size-1){
-		    throw new IndexOutOfBoundsException();
-		}
+    public T get(int index){
+	if(index < 0 || index > size-1){
+	    throw new IndexOutOfBoundsException();
+	}
 	       
-	            LNode current = start;
-	            for(int i=0; i<index; i++){
-	                current = current.getNext();
-	            }
-	            return current.getData();
+	LNode current = start;
+	for(int i=0; i<index; i++){
+	    current = current.getNext();
+	}
+	return current.getData();
 	        
-	    }
+    }
 
     public T set(int index, T indexValue){
         if(index < 0 || index > size-1){
@@ -172,7 +172,8 @@ public class MyLinkedList<T> implements Iterable<T>{
 	return counter;
 	
     }
-     public Iterator<T> iterator(){
+
+    public Iterator<T> iterator(){
     	return new MyLinkedListIterator();       
     }
      
@@ -188,9 +189,9 @@ public class MyLinkedList<T> implements Iterable<T>{
         }
 
         public T next(){
-	if(!hasNext()){
+	    if(!hasNext()){
 		throw new NoSuchElementException();
-	}
+	    }
             T temp = current.getData();
             current = current.getNext();
             return temp;
@@ -234,16 +235,18 @@ public class MyLinkedList<T> implements Iterable<T>{
     }
 
     //----------------------------------------------------
-    /*
+    
     public static void main(String[]args){
 	MyLinkedList<Integer> m = new MyLinkedList<Integer>();
+	for(int i=0; i<10; i++){
+	    m.add(i);
+	}
+	//enhanced for loop
+	for(Integer i : m){
+	    System.out.print(i + " ");
+	}
+	System.out.println();
 	
-        m.add(new Integer(5));
-       
-	System.out.println(m);
-      
-       
-	
-        }*/
+    }
 
 }
