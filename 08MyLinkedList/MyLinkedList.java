@@ -241,6 +241,8 @@ public class MyLinkedList<T> implements Iterable<T>{
 	for(int i=0; i<10; i++){
 	    m.add(i);
 	}
+	Iterator<Integer> it = m.iterator();
+	//it.next();
 	//enhanced for loop
 	for(Integer i : m){
 	    System.out.print(i + " ");
