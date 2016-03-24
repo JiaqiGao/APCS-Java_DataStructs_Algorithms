@@ -174,22 +174,36 @@ public class MyLinkedList<T> implements Iterable<T>{
 	return counter;
 	
     }
-
+     public Iterator<T> iterator(){
+    	return new MyLinkedListIterator(this);       
+    }
+     
     public class MyLinkedListIterator implements Iterator<T>{
+        LNode current;
+        
+        public MyLinkedListIterator(MyLinkedList<T> st){
+            current = st.start;
+        }
+        
     	public boolean hasNext(){
+            if (current.getNext() != null) {
+                return true;
+            }
+            return false;
         }
 
         public T next(){
+            T temp = current.getData();
+            current = current.getNext();
+            return temp;
         }
 
         public void remove(){
+            throw new UnsupportedOperationException();
         }
     }
     
-    public Iterator<T> interator(){
-    	return new MyLinkedListIterator();
-        
-    }
+   
     
     
  
