@@ -26,7 +26,7 @@ public class MyLinkedList<T> implements Iterable<T>{
     public String toString(boolean choice){
 	String total = "";
         if(choice){
-	    String copy="[";
+	    String copy="[ ";
 	    if(size!=0){
 		copy+=start.getData();
 	    }
@@ -36,8 +36,8 @@ public class MyLinkedList<T> implements Iterable<T>{
 		current = current.getNext();
 		copy += ", "+current.getData();
 	    }
-	    copy += "]";
-	    total+= "Head: "+
+	    copy += " ]";
+	    total+= "Start: "+
                 (String)start.getData() + " End: "+
                 (String)end.getData();
 
