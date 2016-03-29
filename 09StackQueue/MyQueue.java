@@ -17,8 +17,7 @@ public class MyQueue<T> extends MyLinkedList<T>{
         if(size==0){
             throw new NoSuchElementException();
         }
-        T removal = remove(0);
-        return removal;
+        return remove(0);
     }
 
     /**
