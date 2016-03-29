@@ -1,3 +1,4 @@
+//credit to mr.k
 import java.util.*;
 public class MyLinkedList<T> implements Iterable<T>{
     private class LNode{
