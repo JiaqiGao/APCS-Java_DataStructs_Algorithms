@@ -34,7 +34,7 @@ public class MyStack<T> extends MyLinkedList<T>{
      * Returns the number of items currently in the stack.
      */
     public int size(){
-        return this.size();
+        return size;
     }
 
     /**
