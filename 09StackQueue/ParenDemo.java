@@ -3,12 +3,14 @@ public class ParenDemo{
     public static boolean isMatching(String s){
 	char[][] key = {{'{','}'},{'[',']'},{'(',')'},{'<','>'}};
         MyStack<Character> pancekes = new MyStack<Character>();
-        for(int i=0; i<s.length(); i++){   
+        for(int i=0; i<s.length(); i++){
+	    if(helper(s.charAt(i))!= -2){
                 if(helper(s.charAt(i))==-1){
                     pancekes.push(s.charAt(i));
                 }else if(key[helper(s.charAt(i))][0] == pancekes.peek()){
                     pancekes.pop();  
                 }
+	    }
         }
         return pancekes.isEmpty();
     }
