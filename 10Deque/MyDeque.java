@@ -14,8 +14,11 @@ public class MyDeque<T>{
     }
     */
     public void grow(){
-	ArrayList temp = new ArrayList();
-	
+	ArrayList temp = new ArrayList(size*2);
+	for(int i=0; i<size; i++){
+	    temp.add(ary.get(i));
+	}
+	ary = temp;
     }
     
     public void addFirst(T value){
