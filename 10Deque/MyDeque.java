@@ -37,7 +37,7 @@ public class MyDeque<T>{
     }
 
     @SuppressWarnings("unchecked")
-    public void grow(){
+        public void grow(){
 	T[] temp = (T[]) new Object[size*2];
         int count = start;
 	for(int i=0; i<size; i++){
@@ -55,27 +55,25 @@ public class MyDeque<T>{
     public void addFirst(T value){
 	if(size == data.length)
             grow();
+        size++;
         if(start == 0 && data[start] != null){
             start = data.length-1;
         }else{
             start--;
         }
         data[start] = value;
-        
-        size++;
     }
 
     public void addLast(T value){
         if(size == data.length)
             grow();
+        size++;
         if(end == data.length-1 || data[end] == null){
             end = 0;
         }else{
             end++;
         }
         data[end] = value;
-        
-        size++;
     }
 
     public T removeFirst(){
@@ -83,28 +81,42 @@ public class MyDeque<T>{
             throw new NoSuchElementException();
         T ret = data[start];
         data[start] = null;
+        size--;
         if(start == data.length-1){
             start = 0;
         }else{
             start++;
         }
-        size--;
+        
         return ret;
     }
-    /*
+   
     public T removeLast(){
-	return start;
+	if(data[end] == null)
+            throw new NoSuchElementException();
+        T ret = data[end];
+        data[end] = null;
+        size--;
+        if(end == data.length-1){
+            end = 0;
+        }else{
+            end--;
+        }
+        
+        return ret;
+        
     }
-    */
-     public static void main(String[]args){
+
+    public T getFirst(){
+    }
+
+    public T getLast(){
+    }
+    
+    public static void main(String[]args){
 	MyDeque<String> x = new MyDeque<String>();
 	x.add("fish");
 	System.out.println(x.get());
     }
-     /*
--NoSuchElementException is thrown when there are no elements. 
-5. T getFirst()
-6. T getLast()
--NoSuchElementException is thrown when there are no elements. 
-*/
+
 }
