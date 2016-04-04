@@ -97,11 +97,8 @@ public class MyDeque<T>{
         T ret = data[end];
         data[end] = null;
         size--;
-        if(end == data.length-1){
-            end = 0;
-        }else{
+        if(end != 0)
             end--;
-        }
         
         return ret;
         
@@ -121,8 +118,10 @@ public class MyDeque<T>{
     
     public static void main(String[]args){
 	MyDeque<String> x = new MyDeque<String>();
-	x.add("fish");
-	System.out.println(x.get());
+	x.add("fish1");
+        x.addLast("fish2");
+        x.removeLast();
+	System.out.println(x);
     }
 
 }
