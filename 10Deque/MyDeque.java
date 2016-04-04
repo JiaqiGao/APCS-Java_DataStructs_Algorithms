@@ -2,12 +2,10 @@ import java.util.*;
 
 public class MyDeque<T>{
     T[] data;
-    T start;
-    T end;
+    int start;
+    int end;
     int size;
 
-    public MyDeque(){
-    }
 
     //suppress this ONE function from
     //having warnings.
@@ -21,14 +19,26 @@ public class MyDeque<T>{
 	data[0]=n;
     }
 
-    public T get(){
-	
+    public T get(){	
 	return data[0];
     }
-    
-    
+
+    public String toString(){
+        String total = "[ ";
+        for(int i=0; i<data.length; i++){
+            if(i == data.length-1){
+                total += data[data.length-1] + " ]";
+            }else{
+                total += data[i]+", ";
+            }
+        }
+      
+        return total;
+    }
+
+    @SuppressWarnings("unchecked")
     public void grow(){
-	T[] temp = (T[]) new Object(size*2);
+	T[] temp = (T[]) new Object[size*2];
         int count = start;
 	for(int i=0; i<size; i++){
             if(count==size)
@@ -36,7 +46,8 @@ public class MyDeque<T>{
 	    temp[i] = data[count];
             count++;
 	}
-	ary = temp;
+	data = temp;
+        
         start = 0;
         end = size-1;
     }
@@ -55,40 +66,42 @@ public class MyDeque<T>{
     }
 
     public void addLast(T value){
-        if(size == data.length){
+        if(size == data.length)
             grow();
-        }
         if(end == data.length-1 || data[end] == null){
             end = 0;
         }else{
             end++;
         }
         data[end] = value;
+        
         size++;
     }
 
     public T removeFirst(){
-	return start;
+	if(data[start] == null)
+            throw new NoSuchElementException();
+        T ret = data[start];
+        data[start] = null;
+        if(start == data.length-1){
+            start = 0;
+        }else{
+            start++;
+        }
+        size--;
+        return ret;
     }
-
+    /*
     public T removeLast(){
 	return start;
     }
-
+    */
      public static void main(String[]args){
-	Tester<String> x = new Tester<String>();
+	MyDeque<String> x = new MyDeque<String>();
 	x.add("fish");
 	System.out.println(x.get());
     }
-/*For your MyDeque<T>
-0. You need a private method to grow the array and copy over the values.
-There are 6 public methods:
-1. 
-2. 
--When the array is full, re-size, then add. 
--No exceptions are required since you will re-size.
-3.  
-4. 
+     /*
 -NoSuchElementException is thrown when there are no elements. 
 5. T getFirst()
 6. T getLast()
