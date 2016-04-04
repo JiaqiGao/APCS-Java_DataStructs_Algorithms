@@ -108,9 +108,15 @@ public class MyDeque<T>{
     }
 
     public T getFirst(){
+        if(data[start] == null)
+            throw new NoSuchElementException();
+        return data[start];
     }
 
     public T getLast(){
+        if(data[end] == null)
+            throw new NoSuchElementException();
+        return data[end];
     }
     
     public static void main(String[]args){
