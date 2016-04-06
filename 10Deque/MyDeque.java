@@ -38,29 +38,37 @@ public class MyDeque<T>{
 
     @SuppressWarnings("unchecked")
         public void grow(){
-	T[] temp = (T[]) new Object[size*2];
-        int count = start;
-	for(int i=0; i<size; i++){
-            if(count==size)
-                count=0;
-	    temp[i] = data[count];
-            count++;
-	}
-	data = temp;
-        
-        start = 0;
-        end = size-1;
+	T[] copy = (T[]) new Object[data.length*2];
+
+        int place=0;
+        int index=copy.length-1;
+        for(int i=data.length-1; i>0; i--){
+         
+            copy[index]=data[i];
+            index--;
+           
+        }
+
+        start=0;
+        end=place-1;
+
+        data = copy;
     }
     
     public void addFirst(T value){
 	if(size == data.length)
             grow();
         size++;
-        if(start == 0 && data[start] != null){
-            start = data.length-1;
+        if(start == 0){
+            if(data[start] == null){
+                start = 0;
+            }else{
+                start = data.length-1;
+            }
         }else{
             start--;
         }
+        
         data[start] = value;
     }
 
@@ -77,8 +85,10 @@ public class MyDeque<T>{
     }
 
     public T removeFirst(){
-	if(data[start] == null)
+	if(data[start] == null){
+            System.out.println(data);
             throw new NoSuchElementException();
+        }
         T ret = data[start];
         data[start] = null;
         size--;
@@ -92,8 +102,10 @@ public class MyDeque<T>{
     }
    
     public T removeLast(){
-	if(data[end] == null)
+	if(data[end] == null){
+            System.out.println(data);
             throw new NoSuchElementException();
+        }
         T ret = data[end];
         data[end] = null;
         size--;
