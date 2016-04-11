@@ -7,7 +7,7 @@ public class BetterMaze{
 
     private int      startRow,startCol;
 
-    private Frontier<???> placesToGo;
+    private Frontier<T> placesToGo;
 
     private boolean  animate;//default to false
 

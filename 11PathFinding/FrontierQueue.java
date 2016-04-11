@@ -1,6 +1,23 @@
 public class FrontierQueue<T> implements Frontier<T>{
     T t;
     
+    private class Node{
+	private int x;
+	private int y;
+	private T parent;
+
+	public T getPrev(){
+	    return parent;
+	}
+	
+	public int[] getLocation(){
+	    int[] ret = new int[2];
+	    ret[0] = x;
+	    ret[1] = y;
+	    return ret;
+	}
+    }
+    
     public void add(T element){
     }
     public T next(){
