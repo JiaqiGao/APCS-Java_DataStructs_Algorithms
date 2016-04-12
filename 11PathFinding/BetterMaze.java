@@ -75,16 +75,29 @@ public class BetterMaze{
         return solve();
     }    
 
+    //for (Node n: getNeighbors(something)
     /**Search for the end of the maze using the frontier. 
        Keep going until you find a solution or run out of elements on the frontier.
     **/
     private boolean solve(){
         Node current = null; 
         placesToGo.add(new Node(startRow,startCol,null));
+	int[][] posmoves = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
         while(placesToGo.hasNext()){
             current = placesToGo.next();
-            
-            
+            for(int i=0; i<posmoves.length; i++){   
+		if(maze[current.getX()+posmoves[i][0]][current.getY()+posmoves[i][1]] == 'E'){
+		    return true;
+		}	
+	    }
+	    for(int i=0; i<posmoves.length; i++){   
+		if(maze[current.getX()+posmoves[i][0]][current.getY()+posmoves[i][1]] == ' '){
+		    placesToGo.add(new Node(current.getX()+posmoves[i][0],current.getY()+posmoves[i][1],current));
+		    maze[current.getX()+posmoves[i][0]][current.getY()+posmoves[i][0]] = '.';
+		}	
+	    }
+	    
+	    /*
             if(maze[current.getX()-1][current.getY()] == 'E' ||
                maze[current.getX()+1][current.getY()] == 'E' ||
                maze[current.getX()][current.getY()-1] == 'E' ||
@@ -92,23 +105,24 @@ public class BetterMaze{
                 
                 return true;
             }
-            
+	    */
+            /*
             if(maze[current.getX()-1][current.getY()]==' '){
-                placesToGo.add(new Node(current.getX()-1,current.getY(),current));
-		maze[current.getX()][current.getY()] = '.';
+                
             }
             if(maze[current.getX()+1][current.getY()]==' '){
                 placesToGo.add(new Node(current.getX()+1,current.getY(),current));
-		maze[current.getX()][current.getY()] = '.';
+		maze[current.getX()+1][current.getY()] = '.';
             }
             if(maze[current.getX()][current.getY()-1]==' '){
                 placesToGo.add(new Node(current.getX(),current.getY()-1,current));
-		maze[current.getX()][current.getY()] = '.';
+		maze[current.getX()][current.getY()-1] = '.';
             }
             if(maze[current.getX()][current.getY()+1]==' '){
                 placesToGo.add(new Node(current.getX(),current.getY()+1,current));
-		maze[current.getX()][current.getY()] = '.';
+		maze[current.getX()][current.getY()+1] = '.';
             }
+	    */
         }
         return false;
     }    
