@@ -83,7 +83,7 @@ public class MyLinkedList<T> implements Iterable<T>{
         }
         return temp;
     }
-    public boolean add(T value){
+    public void add(T value){
         if(head == null){
             head = new LNode(value);
             tail = head;
@@ -95,7 +95,7 @@ public class MyLinkedList<T> implements Iterable<T>{
 	    tail = tail.getNext();
         }
         size++;
-        return true;
+        //return true;
     }
     public T remove(int index){
         if(index < 0 || index >= size()){
