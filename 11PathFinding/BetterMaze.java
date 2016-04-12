@@ -62,7 +62,7 @@ public class BetterMaze{
      **/
     public boolean solveBFS(){  
         /** IMPLEMENT THIS **/      
-        //placesToGo = new FrontierQueue<Node>();
+        placesToGo = new FrontierQueue<Node>();
 	return solve();
     }   
 
@@ -71,7 +71,7 @@ public class BetterMaze{
      */ 
     public boolean solveDFS(){
         /** IMPLEMENT THIS **/  
-        //placesToGo = new FrontierStack<Node>();
+        placesToGo = new FrontierStack<Node>();
         return solve();
     }    
 
@@ -79,11 +79,11 @@ public class BetterMaze{
        Keep going until you find a solution or run out of elements on the frontier.
     **/
     private boolean solve(){
-        Node current; 
+        Node current = null; 
         placesToGo.add(new Node(startRow,startCol,null));
         while(placesToGo.hasNext()){
             current = placesToGo.next();
-            maze[current.getX()][current.getY()] = '.';
+            
             
             if(maze[current.getX()-1][current.getY()] == 'E' ||
                maze[current.getX()+1][current.getY()] == 'E' ||
@@ -95,22 +95,31 @@ public class BetterMaze{
             
             if(maze[current.getX()-1][current.getY()]==' '){
                 placesToGo.add(new Node(current.getX()-1,current.getY(),current));
+		maze[current.getX()][current.getY()] = '.';
             }
             if(maze[current.getX()+1][current.getY()]==' '){
                 placesToGo.add(new Node(current.getX()+1,current.getY(),current));
+		maze[current.getX()][current.getY()] = '.';
             }
             if(maze[current.getX()][current.getY()-1]==' '){
                 placesToGo.add(new Node(current.getX(),current.getY()-1,current));
+		maze[current.getX()][current.getY()] = '.';
             }
             if(maze[current.getX()][current.getY()+1]==' '){
                 placesToGo.add(new Node(current.getX(),current.getY()+1,current));
+		maze[current.getX()][current.getY()] = '.';
             }
         }
         return false;
     }    
      
     /**mutator for the animate variable  **/
-    public void setAnimate(boolean b){  /** IMPLEMENT THIS **/ }    
+    public void setAnimate(boolean b){ 
+	/** IMPLEMENT THIS **/ 
+	if(b){
+	    animate = true;
+	}
+    }    
 
 
     public BetterMaze(String filename){
