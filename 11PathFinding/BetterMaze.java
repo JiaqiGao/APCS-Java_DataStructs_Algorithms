@@ -12,6 +12,38 @@ public class BetterMaze{
     private Frontier<Node> placesToGo;
     private boolean  animate;//default to false
 
+    private class Node{
+	private int x;
+	private int y;
+	private Node prev;
+	public Node(int x, int y, Node p){
+	    setX(x);
+	    setY(y);
+	    setPrev(p);
+	}
+	public Node(){
+	    this(0,0,null);
+	}
+	public int getX(){
+	    return x;
+	}
+	public int getY(){
+	    return y;
+	}
+	public Node getPrev(){
+	    return prev;
+	}
+	public void setX(int x){
+	    this.x=x;
+	}
+	public void setY(int y){
+	    this.y=y;
+	}
+	public void setPrev(Node n){
+	    prev = n;
+	}
+		
+    }
    /**return a COPY of solution.
      *This should be : [x1,y1,x2,y2,x3,y3...]
      *the coordinates of the solution from start to end.
