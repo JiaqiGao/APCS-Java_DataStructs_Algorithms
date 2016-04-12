@@ -2,9 +2,7 @@ import java.util.*;
 import java.io.*;
 
 public class BetterMaze{
-    private class Node{
-
-    }
+    
 
     private char[][] maze;
     private int[]    solution;
@@ -16,7 +14,8 @@ public class BetterMaze{
 	private int x;
 	private int y;
 	private Node prev;
-	public Node(int x, int y, Node p){
+
+        public Node(int x, int y, Node p){
 	    setX(x);
 	    setY(y);
 	    setPrev(p);
@@ -24,24 +23,25 @@ public class BetterMaze{
 	public Node(){
 	    this(0,0,null);
 	}
-	public int getX(){
+	public Node getPrev(){
+	    return prev;
+	}
+        public void setPrev(Node n){
+	    prev = n;
+	}
+        public int getX(){
 	    return x;
 	}
 	public int getY(){
 	    return y;
 	}
-	public Node getPrev(){
-	    return prev;
-	}
-	public void setX(int x){
+        public void setX(int x){
 	    this.x=x;
 	}
 	public void setY(int y){
 	    this.y=y;
 	}
-	public void setPrev(Node n){
-	    prev = n;
-	}
+	
 		
     }
    /**return a COPY of solution.
@@ -54,34 +54,62 @@ public class BetterMaze{
     **/
     public int[] solutionCoordinates(){
         /** IMPLEMENT THIS **/      
-	return new int[1];
+	return solution;
     }    
 
 
     /**initialize the frontier as a queue and call solve
-    **/
+     **/
     public boolean solveBFS(){  
         /** IMPLEMENT THIS **/      
-	return false;
+        //placesToGo = new FrontierQueue<Node>();
+	return solve();
     }   
 
 
-   /**initialize the frontier as a stack and call solve
-    */ 
-    public boolean solveDFS(){  
+    /**initialize the frontier as a stack and call solve
+     */ 
+    public boolean solveDFS(){
         /** IMPLEMENT THIS **/  
-	return false;
+        //placesToGo = new FrontierStack<Node>();
+        return solve();
     }    
 
-   /**Search for the end of the maze using the frontier. 
-      Keep going until you find a solution or run out of elements on the frontier.
+    /**Search for the end of the maze using the frontier. 
+       Keep going until you find a solution or run out of elements on the frontier.
     **/
-    private boolean solve(){  
-        /** IMPLEMENT THIS **/  
-	return false;
+    private boolean solve(){
+        Node current; 
+        placesToGo.add(new Node(startRow,startCol,null));
+        while(placesToGo.hasNext()){
+            current = placesToGo.next();
+            maze[current.getX()][current.getY()] = '.';
+            
+            if(maze[current.getX()-1][current.getY()] == 'E' ||
+               maze[current.getX()+1][current.getY()] == 'E' ||
+               maze[current.getX()][current.getY()-1] == 'E' ||
+               maze[current.getX()][current.getY()+1] == 'E'){
+                
+                return true;
+            }
+            
+            if(maze[current.getX()-1][current.getY()]==' '){
+                placesToGo.add(new Node(current.getX()-1,current.getY(),current));
+            }
+            if(maze[current.getX()+1][current.getY()]==' '){
+                placesToGo.add(new Node(current.getX()+1,current.getY(),current));
+            }
+            if(maze[current.getX()][current.getY()-1]==' '){
+                placesToGo.add(new Node(current.getX(),current.getY()-1,current));
+            }
+            if(maze[current.getX()][current.getY()+1]==' '){
+                placesToGo.add(new Node(current.getX(),current.getY()+1,current));
+            }
+        }
+        return false;
     }    
      
-   /**mutator for the animate variable  **/
+    /**mutator for the animate variable  **/
     public void setAnimate(boolean b){  /** IMPLEMENT THIS **/ }    
 
 
