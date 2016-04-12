@@ -54,7 +54,7 @@ public class MyStack<T> implements Iterable<T>{
 	    };
     } 
     
-    public boolean add(T value){
+    public void add(T value){
 	if(start == null){
            
 	    start = new LNode(value);
@@ -65,7 +65,7 @@ public class MyStack<T> implements Iterable<T>{
 	}
         
 	size++;
-	return true;
+	//return true;
     }
     
     public String toString(boolean choice){
