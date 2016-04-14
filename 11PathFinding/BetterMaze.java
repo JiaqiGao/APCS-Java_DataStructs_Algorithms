@@ -5,7 +5,7 @@ public class BetterMaze{
     
 
     private char[][] maze;
-    private int[]    solution;
+    private int[]    solution = new int[2];
     private int      startRow,startCol;
     private Frontier<Node> placesToGo;
     private boolean  animate;//default to false
@@ -52,16 +52,14 @@ public class BetterMaze{
      *(otherwise an empty array is returned)
      *Postcondition:  the correct solution is in the returned array
     **/
-    public int[] solutionCoordinates(){
-        /** IMPLEMENT THIS **/      
+    public int[] solutionCoordinates(){      
 	return solution;
     }    
 
 
     /**initialize the frontier as a queue and call solve
      **/
-    public boolean solveBFS(){  
-        /** IMPLEMENT THIS **/      
+    public boolean solveBFS(){     
         placesToGo = new FrontierQueue<Node>();
 	return solve();
     }   
@@ -69,9 +67,9 @@ public class BetterMaze{
 
     /**initialize the frontier as a stack and call solve
      */ 
-    public boolean solveDFS(){
-        /** IMPLEMENT THIS **/  
+    public boolean solveDFS(){  
         placesToGo = new FrontierStack<Node>();
+        
         return solve();
     }    
 
@@ -81,20 +79,25 @@ public class BetterMaze{
     **/
     private boolean solve(){
         Node current = null; 
+        
         placesToGo.add(new Node(startRow,startCol,null));
 	int[][] posmoves = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
         while(placesToGo.hasNext()){
             current = placesToGo.next();
+            maze[current.getX()][current.getY()]='.';
             for(int i=0; i<posmoves.length; i++){   
 		if(maze[current.getX()+posmoves[i][0]][current.getY()+posmoves[i][1]] == 'E'){
+			solution[0] = current.getX()+posmoves[i][0];
+			solution[1] = current.getY()+posmoves[i][1];
 		    return true;
 		}	
 	    }
 	    for(int i=0; i<posmoves.length; i++){   
 		if(maze[current.getX()+posmoves[i][0]][current.getY()+posmoves[i][1]] == ' '){
 		    placesToGo.add(new Node(current.getX()+posmoves[i][0],current.getY()+posmoves[i][1],current));
-		    maze[current.getX()+posmoves[i][0]][current.getY()+posmoves[i][0]] = '.';
-		}	
+		    
+		}
+		
 	    }
 	    
 	    /*
