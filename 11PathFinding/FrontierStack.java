@@ -7,7 +7,7 @@ public class FrontierStack<T> extends MyStack<T> implements Frontier<T>{
         return pop();
     }
     public boolean hasNext(){
-        return isEmpty();
+        return isEmpty()==false;
     }
     /***Make This Work This Weekend!***/
     /***You can use your classes or built in ones***/

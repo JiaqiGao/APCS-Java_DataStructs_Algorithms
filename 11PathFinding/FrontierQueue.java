@@ -7,7 +7,7 @@ public class FrontierQueue<T> extends MyQueue<T> implements Frontier<T>{
         return dequeue();
     }
     public boolean hasNext(){
-        return isEmpty();
+        return isEmpty()==false;
     }
     /***Make This Work This Weekend!***/
     /***You can use your classes or built in ones***/

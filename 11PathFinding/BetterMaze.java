@@ -44,14 +44,14 @@ public class BetterMaze{
 	
 		
     }
-   /**return a COPY of solution.
+    /**return a COPY of solution.
      *This should be : [x1,y1,x2,y2,x3,y3...]
      *the coordinates of the solution from start to end.
      *Precondition : one of the solveXXX methods has already been 
      * called (solveBFS OR solveDFS OR solveAStar)
      *(otherwise an empty array is returned)
      *Postcondition:  the correct solution is in the returned array
-    **/
+     **/
     public int[] solutionCoordinates(){      
 	return solution;
     }    
@@ -87,8 +87,9 @@ public class BetterMaze{
             maze[current.getX()][current.getY()]='.';
             for(int i=0; i<posmoves.length; i++){   
 		if(maze[current.getX()+posmoves[i][0]][current.getY()+posmoves[i][1]] == 'E'){
-			solution[0] = current.getX()+posmoves[i][0];
-			solution[1] = current.getY()+posmoves[i][1];
+			
+                    solution[0] = current.getX()+posmoves[i][0];
+                    solution[1] = current.getY()+posmoves[i][1];
 		    return true;
 		}	
 	    }
@@ -97,35 +98,14 @@ public class BetterMaze{
 		    placesToGo.add(new Node(current.getX()+posmoves[i][0],current.getY()+posmoves[i][1],current));
 		    
 		}
-		
+	
 	    }
 	    
-	    /*
-            if(maze[current.getX()-1][current.getY()] == 'E' ||
-               maze[current.getX()+1][current.getY()] == 'E' ||
-               maze[current.getX()][current.getY()-1] == 'E' ||
-               maze[current.getX()][current.getY()+1] == 'E'){
-                
-                return true;
-            }
-	    */
-            /*
-            if(maze[current.getX()-1][current.getY()]==' '){
-                
-            }
-            if(maze[current.getX()+1][current.getY()]==' '){
-                placesToGo.add(new Node(current.getX()+1,current.getY(),current));
-		maze[current.getX()+1][current.getY()] = '.';
-            }
-            if(maze[current.getX()][current.getY()-1]==' '){
-                placesToGo.add(new Node(current.getX(),current.getY()-1,current));
-		maze[current.getX()][current.getY()-1] = '.';
-            }
-            if(maze[current.getX()][current.getY()+1]==' '){
-                placesToGo.add(new Node(current.getX(),current.getY()+1,current));
-		maze[current.getX()][current.getY()+1] = '.';
-            }
-	    */
+	    wait(160);
+	    if(animate){
+	    
+                System.out.println(this);
+	    }
         }
         return false;
     }    
