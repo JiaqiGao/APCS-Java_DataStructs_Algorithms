@@ -10,44 +10,55 @@ public class BSTree<T extends Comparable<T>>{
     }
     */
     public int getHeight(){
-	return 0;
-	
+	if(root == null){
+            return 0;
+        }
+        return root.height();
     }
+
+    public int getHeight(Node nod){
+        return nod.height();
+    }
+
+   
 
     public void add(T value){
-	Node temp = new Node(value);
-	add(temp, root);
-    }
-
-    public void add(Node value, Node parent){	
+        if(root == null){
+            root = new Node(value);
+        }else{
+            root.add(value);   
+        }
+        /*	
 	if(parent.getLeft()==null){
 	    parent.setLeft(temp);
-	}else{
-	    if(temp.getRight()==null){
-		parent.setRight(temp);
-	    }else{
-		if(parent.getLeft().getHeight() < parent.getRight().getHeight()){
-		    add(value, parent.getLeft());
-		}
-	        add(value, parent.getRight());
-	    }
 	}
+        else if(temp.getRight()==null){
+	    parent.setRight(temp);
+	}
+        else if(parent.getLeft().getHeight() < parent.getRight().getHeight()){
+	    add(value, parent.getLeft());
+	}else{
+	    add(value, parent.getRight());
+	}
+        */
+	
     }
     /*
     public String toString() ***
     public boolean contains(T value)
       //this can be linear for now.
     */
-    
+    /*    
     public T remove(T value){
 	if(!root.hasChildren()){
 	    
 	}
     }
-    
+    */
     private class Node{
 	T data;
 	Node left, right;
+        int height;
 	
 	public Node(T value){
 	    data = value;
@@ -76,6 +87,33 @@ public class BSTree<T extends Comparable<T>>{
 	    }
 	    return true;
 	}
+        public void add(T value){
+            if(value.compareTo(getData())<0){
+		if(getLeft()==null){
+		    setLeft(new Node(value));
+		}else{
+		    getLeft().add(value);
+		}
+	    }else{
+		if(getRight()==null){
+		    setRight(new Node(value));
+		}else{
+		    getRight().add(value);
+		}
+	    }
+        }
+        public int height(){
+            if(getLeft()==null && getRight()==null){
+                return 1;
+            }else if(getRight()==null){
+                return 1+getLeft().height();
+            }else if(getLeft()==null){
+                return 1+getRight().height();
+            }else{
+                return 1+Math.max(getRight().height(), getLeft().height());
+            }
+            
+        }
 	
     }
 
