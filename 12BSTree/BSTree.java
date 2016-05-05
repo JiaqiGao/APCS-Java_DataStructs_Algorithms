@@ -4,11 +4,6 @@ import java.io.*;
 public class BSTree<T extends Comparable<T>>{
     Node root;
     
-    /*
-    public BSTree(){
-	root = null;
-    }
-    */
     public int getHeight(){
 	if(root == null){
             return 0;
@@ -20,28 +15,11 @@ public class BSTree<T extends Comparable<T>>{
         return nod.height();
     }
 
-   
-
     public void add(T value){
         if(root == null){
             root = new Node(value);
         }else{
-            root.add(value);   
-        }
-        /*	
-	if(parent.getLeft()==null){
-	    parent.setLeft(temp);
-	}
-        else if(temp.getRight()==null){
-	    parent.setRight(temp);
-	}
-        else if(parent.getLeft().getHeight() < parent.getRight().getHeight()){
-	    add(value, parent.getLeft());
-	}else{
-	    add(value, parent.getRight());
-	}
-        */
-	
+            root.add(value);   	
     }
     
     public String toString(){
@@ -56,19 +34,7 @@ public class BSTree<T extends Comparable<T>>{
 	}
 	return root.contains(value);	
     }
-    
-    /*
-    
-    public boolean contains(T value)
-      //this can be linear for now.
-    */
-    /*    
-    public T remove(T value){
-	if(!root.hasChildren()){
-	    
-	}
-    }
-    */
+
     private class Node{
 	T data;
 	Node left, right;
@@ -104,12 +70,12 @@ public class BSTree<T extends Comparable<T>>{
         
         public String toString(){
 	    String combine = getData() + " ";
-	    if(getLeft()!=null){
+	    if(getLeft() != null){
 		combine += getLeft().toString();
 	    }else{
 		combine += "_ ";
 	    }
-	    if(getRight()!=null){
+	    if(getRight() != null){
 		combine += getRight().toString();
 	    }else{
 		combine += "_ ";
