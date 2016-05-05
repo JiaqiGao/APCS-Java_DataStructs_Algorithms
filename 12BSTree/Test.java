@@ -6,6 +6,9 @@ public class Test{
         b.add(4);
         b.add(12);
         System.out.println(b);
+        
+        System.out.println(b.contains(4));
+        System.out.println(b.contains(2323));
     }
 
 

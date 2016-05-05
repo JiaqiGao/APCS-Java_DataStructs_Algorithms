@@ -50,10 +50,15 @@ public class BSTree<T extends Comparable<T>>{
 	}
 	  return root.toString();
     }
-
+    public boolean contains(T value){
+	if(root == null){
+	    return false;
+	}
+	return root.contains(value);	
+    }
     
     /*
-    public String toString() ***
+    
     public boolean contains(T value)
       //this can be linear for now.
     */
@@ -139,6 +144,22 @@ public class BSTree<T extends Comparable<T>>{
             }
             
         }
+        private boolean contains(T value){
+	    if(getData().equals(value)){
+		return true;
+	    }
+	    if(getLeft()==null && getRight()==null){
+		return false;
+	    }
+	    if(getLeft()==null){
+		return getRight().contains(value);
+	    }
+	    if(getRight()==null){
+		return getLeft().contains(value);
+	    }
+	    return getLeft().contains(value) || getRight().contains(value);
+	   
+	}
 	
     }
 
