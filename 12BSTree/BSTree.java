@@ -43,6 +43,36 @@ public class BSTree<T extends Comparable<T>>{
         */
 	
     }
+    public String toString(){
+        String combine = "";
+        if(root == null){
+            return "null";
+        }
+        combine += String.valueOf(root.getData());
+        return toString(combine, root);
+    }
+
+    public String toString(String combine, Node nod){
+        if(nod == null){
+            return combine;
+        }
+        
+        while(nod.hasChildren()){
+            if(nod.getRight()==null){
+                combine += String.valueOf(nod.getLeft().getData()) + toString(combine, nod.getLeft());
+            }
+            else if(nod.getLeft()==null){
+                combine += String.valueOf(nod.getRight().getData()) + toString(combine, nod.getRight());
+            }
+            else{
+                combine += String.valueOf(nod.getLeft().getData()) +
+                    String.valueOf(nod.getRight().getData()) +
+                    toString(combine, nod.getLeft()) +
+                    toString(combine, nod.getRight());
+            }
+        }
+        return combine;
+    }
     /*
     public String toString() ***
     public boolean contains(T value)
