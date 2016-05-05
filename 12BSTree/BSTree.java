@@ -11,15 +11,12 @@ public class BSTree<T extends Comparable<T>>{
         return root.height();
     }
 
-    public int getHeight(Node nod){
-        return nod.height();
-    }
-
     public void add(T value){
         if(root == null){
             root = new Node(value);
         }else{
-            root.add(value);   	
+            root.add(value);
+        }
     }
     
     public String toString(){
@@ -84,20 +81,37 @@ public class BSTree<T extends Comparable<T>>{
 	}
         
         public void add(T value){
-            if(value.compareTo(getData())<0){
-		if(getLeft()==null){
+            if(value.compareTo(getData()) < 0){
+		if(getLeft() == null){
 		    setLeft(new Node(value));
 		}else{
 		    getLeft().add(value);
 		}
 	    }else{
-		if(getRight()==null){
+		if(getRight() == null){
 		    setRight(new Node(value));
 		}else{
 		    getRight().add(value);
 		}
 	    }
         }
+            /*
+            if(getLeft().height() < getRight().height()){
+                if(getLeft() == null){
+                    setLeft(new Node(value));
+                }else{
+                    get.Left().add(value);
+                }
+            }else{
+                if(getRight() == null){
+                    setRight(new Node(value));
+                }else{
+                    get.Right().add(value);
+                }
+            }
+            */
+            
+        
         public int height(){
             if(getLeft()==null && getRight()==null){
                 return 1;
