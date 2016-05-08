@@ -22,7 +22,7 @@ public class MyHeap<T extends Comparable<T>>{
    }
 
    private void pushDown(int k){
-       
+       pushUp(k/2);
    }
 
    private void pushUp(int k){
