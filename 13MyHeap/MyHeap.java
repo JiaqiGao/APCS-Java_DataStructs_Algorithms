@@ -3,7 +3,8 @@ import java.util.*;
 @SuppressWarnings("unchecked")
 public class MyHeap<T extends Comparable<T>>{
    private int size;
-   private T[] data;   
+   private T[] data;
+   boolean max = true;
 
    public MyHeap(){
        data = (T[])new Comparable[10];
@@ -20,7 +21,12 @@ public class MyHeap<T extends Comparable<T>>{
     
    }
 
-   //public MyHeap(boolean isMax)
+   public MyHeap(boolean isMax){
+       if(!isMax){
+           max = false;
+       }
+       heapify();
+   }
    //public MyHeap(T[] array, boolean isMax)
    
    private void pushDown(int k){
