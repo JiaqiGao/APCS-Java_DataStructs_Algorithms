@@ -7,7 +7,6 @@ public class MyHeap<T extends Comparable<T>>{
 
    public MyHeap(){
        data = (T[])new Comparable[10];
-       data[0] = null;
        
    }
 
@@ -21,6 +20,9 @@ public class MyHeap<T extends Comparable<T>>{
     
    }
 
+   //public MyHeap(boolean isMax)
+   //public MyHeap(T[] array, boolean isMax)
+   
    private void pushDown(int k){
        pushUp(k/2);
    }
@@ -53,7 +55,7 @@ public class MyHeap<T extends Comparable<T>>{
            index=i+1;
            indexNext=i+2;
            indexAbove=i;
-           System.out.println(index + "," + indexNext + "," + indexAbove);
+           //System.out.println(index + "," + indexNext + "," + indexAbove);
            if(data[index].compareTo(data[indexNext]) > 0){
                if(data[index].compareTo(data[indexAbove]) > 0){
                    pushUp(index);
@@ -66,11 +68,11 @@ public class MyHeap<T extends Comparable<T>>{
            
        }
        for(int i=size; i>size/2; i--){
-           System.out.println(Arrays.toString(data));
+           //System.out.println(Arrays.toString(data));
            index=i-1;
            indexNext=i;
            indexAbove=i/2;
-           System.out.println(index + "," + indexNext + "," + indexAbove);
+           //System.out.println(index + "," + indexNext + "," + indexAbove);
            if(data[index].compareTo(data[indexNext]) > 0){
                if(data[index].compareTo(data[indexAbove]) > 0){
                    pushUp(index);
@@ -85,56 +87,38 @@ public class MyHeap<T extends Comparable<T>>{
    }
 
    public T delete(){
-       return data[0];
+       //im assuming this means remove the root as it doesnt take in a parameter
+       T save = data[1];
+       data[1] = data[size];
+       data[size] = null;
+       size--;
+       heapify();
+       return save;
+       
    }
 
    public void add(T x){
-       /*
-       if(size == data.length){
-	   doubleSize();
+       if(data.length<=size){
+           doubleSize();
        }
        data[size+1] = x;
-       int next = (size+1)/2; 
-       while(x < next){
-	   pushUp(next);
-	   pushDown(x);
-       }
-       */
+       size++;
+       heapify();
        
    }
 
    private void doubleSize(){
-       /*
-       T[] copy = (T[]) new Object[data.length*2];  
-        int index = start;
-        for(int i=1; i>size; i++){
-            if(index == size){
-                index = 0;
-            }
-            copy[i] = data[index];
-            index++;
-        }
-
-        start = 0;
-        end = 0;
-
-        data = copy;
-       */
+       T[] copy = (T[]) new Object[data.length*2];
+       for(int i=0; i>size; i++){
+           copy[i] = data[i];
+       }
+       data = copy;
+       
    }
 
    public String toString(){
        return Arrays.toString(data);
    }
 
-   //do this last
-       /*
-   public MyHeap(boolean isMax)
-   public MyHeap(T[] array, boolean isMax)
-       */
 }
 
-/*
- public MyHeap(T[] x, boolean b){
-	
- }
-*/  
