@@ -6,18 +6,19 @@ public class MyHeap<T extends Comparable<T>>{
    private T[] data;   
 
    public MyHeap(){
-       data = (T[]) new Object[10];
-       data[0] = size;
-       size = 1; 
+       data = (T[])new Comparable[10];
+       data[0] = null;
+       
    }
 
    public MyHeap(T[] array){
-       data = T[array.length+1];
-       size = array.length+1;
-       for(int i=1; i<data.length; i++){
+       data = (T[])new Comparable[10];
+       for(int i=1; i<data.length-2; i++){
 	   data[i]=array[i-1];
+           size++;
        }
        heapify();
+    
    }
 
    private void pushDown(int k){
@@ -25,10 +26,19 @@ public class MyHeap<T extends Comparable<T>>{
    }
 
    private void pushUp(int k){
-       while(data[k]>data[k/2]){
-	   T temp = data[k/2];
-	   data[k/2] = data[k];
-	   data[k] = temp;
+       T temp = data[k/2];
+       data[k/2] = data[k];
+       data[k] = temp;
+       if(2*k < size){
+           if(data[k].compareTo(data[2*k])<0 ||
+              data[k].compareTo(data[(2*k)+1])<0){
+               if(data[(2*k)+1].compareTo(data[2*k])<0){
+                   //right larger than left
+                   pushUp(2*k);
+               }else{
+                   pushUp((2*k)+1);
+               }
+           }
        }
    }
 
@@ -37,10 +47,40 @@ public class MyHeap<T extends Comparable<T>>{
 	  2*index+1 = right child
 	  index/2 = parent index
 	*/
-       index = size/2;
-       indexNext = size/2 + 2;
-       while(index<1 && data[index] < data[indexNext]){
-	   if(data[index] > 
+       int index, indexNext, indexAbove;
+       
+       for(int i=size/2; i>0; i--){
+           index=i+1;
+           indexNext=i+2;
+           indexAbove=i;
+           System.out.println(index + "," + indexNext + "," + indexAbove);
+           if(data[index].compareTo(data[indexNext]) > 0){
+               if(data[index].compareTo(data[indexAbove]) > 0){
+                   pushUp(index);
+               }
+           }else{
+               if(data[indexNext].compareTo(data[indexAbove]) > 0){
+                   pushUp(indexNext);
+               }
+           }
+           
+       }
+       for(int i=size; i>size/2; i--){
+           System.out.println(Arrays.toString(data));
+           index=i-1;
+           indexNext=i;
+           indexAbove=i/2;
+           System.out.println(index + "," + indexNext + "," + indexAbove);
+           if(data[index].compareTo(data[indexNext]) > 0){
+               if(data[index].compareTo(data[indexAbove]) > 0){
+                   pushUp(index);
+               }
+           }else{
+               if(data[indexNext].compareTo(data[indexAbove]) > 0){
+                   pushUp(indexNext);
+               }
+           }
+           
        }
    }
 
@@ -49,6 +89,7 @@ public class MyHeap<T extends Comparable<T>>{
    }
 
    public void add(T x){
+       /*
        if(size == data.length){
 	   doubleSize();
        }
@@ -58,10 +99,12 @@ public class MyHeap<T extends Comparable<T>>{
 	   pushUp(next);
 	   pushDown(x);
        }
+       */
        
    }
 
    private void doubleSize(){
+       /*
        T[] copy = (T[]) new Object[data.length*2];  
         int index = start;
         for(int i=1; i>size; i++){
@@ -76,6 +119,7 @@ public class MyHeap<T extends Comparable<T>>{
         end = 0;
 
         data = copy;
+       */
    }
 
    public String toString(){
