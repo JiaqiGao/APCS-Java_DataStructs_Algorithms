@@ -93,7 +93,6 @@ public class MyHeap<T extends Comparable<T>>{
    }
 
    public T delete(){
-       //im assuming this means remove the root as it doesnt take in a parameter
        T save = data[1];
        data[1] = data[size];
        data[size] = null;
@@ -123,7 +122,19 @@ public class MyHeap<T extends Comparable<T>>{
    }
 
    public String toString(){
-       return Arrays.toString(data);
+       String start = "[";
+       for(int i=1; i<data.length; i++){
+	   if(data[i]!=null && i!=size){
+	       start += String.valueOf(i);
+	       start += ",";
+	   }else{
+	       if(data[i]!=null){
+		   start += String.valueOf(i);
+	       }
+	   }
+       }
+       start += "]"
+       return start;
    }
 
 }
