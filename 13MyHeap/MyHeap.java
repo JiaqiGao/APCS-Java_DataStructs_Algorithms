@@ -12,7 +12,7 @@ public class MyHeap<T extends Comparable<T>>{
    }
 
    public MyHeap(T[] array){
-       data = (T[])new Comparable[10];
+       data = (T[])new Comparable[array.length];
        for(int i=1; i<data.length-2; i++){
 	   data[i]=array[i-1];
            size++;
@@ -22,8 +22,18 @@ public class MyHeap<T extends Comparable<T>>{
    }
 
    public MyHeap(boolean isMax){
+       data = (T[])new Comparable[10];
+       max = isMax;
+   }
+
+   public MyHeap(T[] array, boolean isMax){
        if(!isMax){
            max = false;
+       }
+       data = (T[])new Comparable[array.length];
+       for(int i=1; i<data.length-2; i++){
+	   data[i]=array[i-1];
+           size++;
        }
        heapify();
    }
@@ -38,13 +48,25 @@ public class MyHeap<T extends Comparable<T>>{
        data[k/2] = data[k];
        data[k] = temp;
        if(2*k < size){
-           if(data[k].compareTo(data[2*k])<0 ||
-              data[k].compareTo(data[(2*k)+1])<0){
-               if(data[(2*k)+1].compareTo(data[2*k])<0){
-                   //right larger than left
-                   pushUp(2*k);
-               }else{
-                   pushUp((2*k)+1);
+           if(max==true){
+               if(data[k].compareTo(data[2*k])<0 ||
+                  data[k].compareTo(data[(2*k)+1])<0){
+                   if(data[(2*k)+1].compareTo(data[2*k])<0){
+                       //right larger than left
+                       pushUp(2*k);
+                   }else{
+                       pushUp((2*k)+1);
+                   }
+               }
+           }else{
+               if(data[k].compareTo(data[2*k])>0 ||
+                  data[k].compareTo(data[(2*k)+1])>0){
+                   if(data[(2*k)+1].compareTo(data[2*k])>0){
+                       //right larger than left
+                       pushUp(2*k);
+                   }else{
+                       pushUp((2*k)+1);
+                   }
                }
            }
        }
@@ -62,13 +84,25 @@ public class MyHeap<T extends Comparable<T>>{
            indexNext=i+2;
            indexAbove=i;
            //System.out.println(index + "," + indexNext + "," + indexAbove);
-           if(data[index].compareTo(data[indexNext]) > 0){
-               if(data[index].compareTo(data[indexAbove]) > 0){
-                   pushUp(index);
+           if(max==true){
+               if(data[index].compareTo(data[indexNext]) > 0){
+                   if(data[index].compareTo(data[indexAbove]) > 0){
+                       pushUp(index);
+                   }
+               }else{
+                   if(data[indexNext].compareTo(data[indexAbove]) > 0){
+                       pushUp(indexNext);
+                   }
                }
            }else{
-               if(data[indexNext].compareTo(data[indexAbove]) > 0){
-                   pushUp(indexNext);
+               if(data[index].compareTo(data[indexNext]) < 0){
+                   if(data[index].compareTo(data[indexAbove]) < 0){
+                       pushUp(index);
+                   }
+               }else{
+                   if(data[indexNext].compareTo(data[indexAbove]) < 0){
+                       pushUp(indexNext);
+                   }
                }
            }
            
@@ -79,13 +113,25 @@ public class MyHeap<T extends Comparable<T>>{
            indexNext=i;
            indexAbove=i/2;
            //System.out.println(index + "," + indexNext + "," + indexAbove);
-           if(data[index].compareTo(data[indexNext]) > 0){
-               if(data[index].compareTo(data[indexAbove]) > 0){
-                   pushUp(index);
+           if(max==true){
+               if(data[index].compareTo(data[indexNext]) > 0){
+                   if(data[index].compareTo(data[indexAbove]) > 0){
+                       pushUp(index);
+                   }
+               }else{
+                   if(data[indexNext].compareTo(data[indexAbove]) > 0){
+                       pushUp(indexNext);
+                   }
                }
            }else{
-               if(data[indexNext].compareTo(data[indexAbove]) > 0){
-                   pushUp(indexNext);
+               if(data[index].compareTo(data[indexNext]) < 0){
+                   if(data[index].compareTo(data[indexAbove]) < 0){
+                       pushUp(index);
+                   }
+               }else{
+                   if(data[indexNext].compareTo(data[indexAbove]) < 0){
+                       pushUp(indexNext);
+                   }
                }
            }
            
@@ -125,15 +171,15 @@ public class MyHeap<T extends Comparable<T>>{
        String start = "[";
        for(int i=1; i<data.length; i++){
 	   if(data[i]!=null && i!=size){
-	       start += String.valueOf(i);
+	       start += String.valueOf(data[i]);
 	       start += ",";
 	   }else{
 	       if(data[i]!=null){
-		   start += String.valueOf(i);
+		   start += String.valueOf(data[i]);
 	       }
 	   }
        }
-       start += "]"
+       start += "]";
        return start;
    }
 
