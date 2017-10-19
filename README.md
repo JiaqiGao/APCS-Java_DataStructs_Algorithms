@@ -1,3 +1,3 @@
-# MKS22X
+# AP Computer Science II Assignments
 
-A repo for ap computer science II assignments
+An amalgamation of AP Computer Science II assignments completed in Java on data structures and algorithms.
